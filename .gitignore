@@ -7,3 +7,4 @@ lib
 types
 package-lock.json
 yarn.lock
+coverage

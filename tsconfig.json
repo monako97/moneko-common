@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "moduleResolution": "Node",
-    "target": "ES6",
+    "target": "es2016",
     "module": "CommonJS",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -9,6 +9,7 @@
     "declaration": true,
     "emitDeclarationOnly": false,
     "removeComments": false, 
-    "outDir": "lib"
-  }
+    "outDir": "lib",
+  },
+  "exclude": ["src/__tests__"]
 }
