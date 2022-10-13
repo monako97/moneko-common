@@ -1,0 +1,2 @@
+# moneko-common
+common
