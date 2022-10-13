@@ -7,9 +7,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "declaration": true,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": true,
     "removeComments": false, 
     "outDir": "lib",
+    "rootDir": "src"
   },
-  "exclude": ["src/__tests__"]
+  "exclude": ["src/__tests__"],
+  "include": ["src", "typings"]
 }
