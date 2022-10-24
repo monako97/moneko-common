@@ -1,15 +1,15 @@
-import { isUndefined, isFunction, isNull } from './type';
+import { isUndefined, isFunction } from './type';
 
-interface ClientSizeTypes {
+export interface ClientSize {
   width: number;
   height: number;
 }
 /**
  * 获取可视区域大小
- * @return {ClientSizeTypes} clientWidth and clientHeight
+ * @return {ClientSize} clientWidth and clientHeight
  */
-export const getClientSize = (): ClientSizeTypes => {
-  if (!isNull(window.innerWidth)) {
+export function getClientSize(): ClientSize {
+  if (window.innerWidth !== null) {
     // ie9 +  最新浏览器
     return {
       width: window.innerWidth,
@@ -33,7 +33,7 @@ export const getClientSize = (): ClientSizeTypes => {
  * 获取最大 z-index
  * @returns {number} z-index
  */
-export const getMaxZindex = (): number => {
+export function getMaxZindex(): number {
   return (Array.prototype.slice.call(document.body.querySelectorAll('*')) || []).reduce(
     (r, e) => Math.max(r, +window.getComputedStyle(e).zIndex || 0),
     0
@@ -45,12 +45,12 @@ export const getMaxZindex = (): number => {
  * @param {HTMLElement} ele HTMLElement
  * @return {Number} scrollTop
  */
-export const getScrollTop = (ele?: HTMLElement): number => {
+export function getScrollTop(ele?: HTMLElement): number {
   if (ele) {
     return ele.scrollTop;
   } else if (!isUndefined(window.pageXOffset)) {
     return window.pageYOffset;
-  } else if ((document.compatMode || '') === 'CSS1Compat') {
+  } else if ((document.compatMode) === 'CSS1Compat') {
     return document.documentElement.scrollTop;
   }
   return document.body.scrollTop;
@@ -61,14 +61,11 @@ export const getScrollTop = (ele?: HTMLElement): number => {
  * @param {string} entity HTML实体字符
  * @returns {string} string
  */
-export const entityToString = (entity: string): string => {
-  let div: HTMLDivElement | null = document.createElement('div');
+export function entityToString(entity: string): string {
+  let div: HTMLDivElement = document.createElement('div');
 
   div.innerHTML = entity;
-  const res = div.innerText || div.textContent;
-
-  div = null;
-  return res || '';
+  return div.innerText || div.textContent || '';
 };
 
 /**
@@ -78,7 +75,7 @@ export const entityToString = (entity: string): string => {
  * @param {Function} onError 失败的回调
  * @returns {Promise<void>} Promise<void>
  */
-export const setClipboard = (text: string, target?: Element, onError?: () => void): void => {
+export function setClipboard(text: string, target?: Element, onError?: () => void): void {
   const clipboardTimer = (_target: HTMLElement | Element) => {
     let _clipboardTimer: number | null = window.setTimeout(() => {
       _target.setAttribute('data-copy-exit', '');
