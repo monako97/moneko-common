@@ -1,17 +1,7 @@
-export { classNames, getPrefixCls } from "./classname";
-export {
-  isFullscreen,
-  exitFullscreen,
-  toggleFullscreen,
-  requestFullscreen,
-} from "./fullscreen";
-export { downloadBlob } from "./download";
-export {
-  getMaxZindex,
-  getScrollTop,
-  entityToString,
-  setClipboard,
-} from "./document";
+export { classNames, getPrefixCls } from './classname';
+export { isFullscreen, exitFullscreen, toggleFullscreen, requestFullscreen } from './fullscreen';
+export { downloadBlob } from './download';
+export { getMaxZindex, getScrollTop, entityToString, setClipboard } from './document';
 
 export {
   getType,
@@ -21,7 +11,6 @@ export {
   isUndefined,
   isString,
   isSvgElement,
-  arraysEqual,
   functionsEqual,
-  deepClone,
-} from "./type";
+  cloneDeep,
+} from './data-judgment';

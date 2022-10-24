@@ -1,0 +1,6 @@
+extends:
+  - neko
+ignorePatterns:
+  - node_modules/
+  - lib/
+  - coverage/

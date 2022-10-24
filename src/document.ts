@@ -1,4 +1,4 @@
-import { isUndefined, isFunction } from './type';
+import { isUndefined } from './data-judgment';
 
 export interface ClientSize {
   width: number;
@@ -27,7 +27,7 @@ export function getClientSize(): ClientSize {
     width: document.body.clientWidth,
     height: document.body.clientHeight,
   };
-};
+}
 
 /**
  * 获取最大 z-index
@@ -38,7 +38,7 @@ export function getMaxZindex(): number {
     (r, e) => Math.max(r, +window.getComputedStyle(e).zIndex || 0),
     0
   );
-};
+}
 
 /**
  * 获取滚动条距离顶端的距离
@@ -50,11 +50,11 @@ export function getScrollTop(ele?: HTMLElement): number {
     return ele.scrollTop;
   } else if (!isUndefined(window.pageXOffset)) {
     return window.pageYOffset;
-  } else if ((document.compatMode) === 'CSS1Compat') {
+  } else if (document.compatMode === 'CSS1Compat') {
     return document.documentElement.scrollTop;
   }
   return document.body.scrollTop;
-};
+}
 
 /**
  * HTML实体字符转string
@@ -62,11 +62,11 @@ export function getScrollTop(ele?: HTMLElement): number {
  * @returns {string} string
  */
 export function entityToString(entity: string): string {
-  let div: HTMLDivElement = document.createElement('div');
+  const div: HTMLDivElement = document.createElement('div');
 
   div.innerHTML = entity;
   return div.innerText || div.textContent || '';
-};
+}
 
 /**
  * 复制文本到剪切板
@@ -75,7 +75,8 @@ export function entityToString(entity: string): string {
  * @param {Function} onError 失败的回调
  * @returns {Promise<void>} Promise<void>
  */
-export function setClipboard(text: string, target?: Element, onError?: () => void): void {
+// eslint-disable-next-line no-unused-vars
+export function setClipboard(text: string, target?: Element, onError?: (e: string) => void): void {
   const clipboardTimer = (_target: HTMLElement | Element) => {
     let _clipboardTimer: number | null = window.setTimeout(() => {
       _target.setAttribute('data-copy-exit', '');
@@ -99,26 +100,23 @@ export function setClipboard(text: string, target?: Element, onError?: () => voi
       target.setAttribute('data-copy', 'failure');
       clipboardTimer(target);
     }
-    if (isFunction(onError)) {
-      onError();
-    }
+    onError?.('Available only in secure contexts.');
     return;
   }
 
   if (target) {
-    navigator.clipboard
-      .writeText(text)
-      .then(
-        () => {
-          target.setAttribute('data-copy', 'success');
-          clipboardTimer(target);
-        },
-        () => {
-          target.setAttribute('data-copy', 'failure');
-          clipboardTimer(target);
-        }
-      );
+    navigator.clipboard.writeText(text).then(
+      () => {
+        target.setAttribute('data-copy', 'success');
+        clipboardTimer(target);
+      },
+      (e) => {
+        target.setAttribute('data-copy', 'failure');
+        clipboardTimer(target);
+        onError?.(e);
+      }
+    );
   } else {
     navigator.clipboard.writeText(text);
   }
-};
+}
