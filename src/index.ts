@@ -16,3 +16,5 @@ export {
 } from './data-judgment';
 
 export { default as passiveSupported } from './passive-supported';
+
+export { default as WatchSticky } from './watch-sticky';

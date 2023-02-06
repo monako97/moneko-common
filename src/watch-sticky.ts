@@ -1,6 +1,6 @@
 import { isFunction } from './data-judgment';
 
-export class WatchSticky {
+class WatchSticky {
   private readonly topOb: IntersectionObserver;
   private readonly bottomOb: IntersectionObserver;
   private _isIntersecting = false;
