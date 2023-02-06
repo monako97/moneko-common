@@ -14,3 +14,5 @@ export {
   functionsEqual,
   cloneDeep,
 } from './data-judgment';
+
+export { default as passiveSupported } from './passive-supported';

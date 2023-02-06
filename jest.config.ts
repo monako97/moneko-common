@@ -1,8 +1,7 @@
 const ignore = [
   '<rootDir>/test/',
   '<rootDir>/lib/',
-  '<rootDir>/es/',
-  '<rootDir>/dist/',
+  '<rootDir>/coverage/',
   '<rootDir>/node_modules/',
 ];
 
@@ -13,25 +12,13 @@ export default {
   testEnvironment: 'jsdom',
   roots: ['src'],
   coveragePathIgnorePatterns: ignore,
-  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
+  moduleFileExtensions: ['js', 'ts'],
   testPathIgnorePatterns: ignore,
-  transformIgnorePatterns: ignore.filter(
-    (o) =>
-      ![
-        '<rootDir>/test/',
-      ].includes(o)
-  ),
+  transformIgnorePatterns: ignore.filter((o) => !['<rootDir>/test/'].includes(o)),
   transform: {
-    '^.+\\.(t|j)sx?$': '@swc/jest',
+    '^.+\\.(t|j)s$': '@swc/jest',
   },
   setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
-  testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
-  ],
-  moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/test/file.mock.ts',
-    '\\.(css|less)$': 'identity-obj-proxy',
-    'iconfont.js$': '<rootDir>/test/file.mock.ts',
-  },
+  testMatch: ['<rootDir>/src/**/__tests__/**/*.{js,ts}'],
+  moduleNameMapper: {},
 };
