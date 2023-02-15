@@ -1,6 +1,10 @@
-export const getPrefixCls = <T extends string, P extends string>(
+export function getPrefixCls<T extends string, P extends string>(
   className: T,
   prefixCls: P
-): `${P}-${T}` => `${prefixCls}-${className}`;
+): `${P}-${T}` {
+  return `${prefixCls}-${className}`;
+}
 
-export const classNames = (...cls: unknown[]) => cls.filter(Boolean).join(' ');
+export function classNames(...cls: unknown[]) {
+  return cls.filter(Boolean).join(' ');
+}

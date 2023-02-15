@@ -9,7 +9,7 @@ export interface Navigator {
  * @param {Blob} blob Blob
  * @param {string} fileName 文件名
  */
-export const downloadBlob = (blob: Blob, fileName: string): void => {
+export function downloadBlob(blob: Blob, fileName: string): void {
   const navigator = window.navigator as Navigator;
 
   // window.navigator.msSaveBlob：以本地方式保存文件
@@ -29,4 +29,4 @@ export const downloadBlob = (blob: Blob, fileName: string): void => {
     // 清除对象
     URL.revokeObjectURL(objectUrl);
   }
-};
+}

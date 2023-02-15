@@ -1,4 +1,4 @@
-import { isUndefined } from './data-judgment';
+import { isFunction, isUndefined } from './data-judgment';
 
 export interface ClientSize {
   width: number;
@@ -100,20 +100,24 @@ export function setClipboard(text: string, target?: Element, onError?: (e: strin
       target.setAttribute('data-copy', 'failure');
       clipboardTimer(target);
     }
-    onError?.('Available only in secure contexts.');
+    if (isFunction(onError)) {
+      onError('Available only in secure contexts.');
+    }
     return;
   }
 
   if (target) {
     navigator.clipboard.writeText(text).then(
-      () => {
+      function () {
         target.setAttribute('data-copy', 'success');
         clipboardTimer(target);
       },
-      (e) => {
+      function (e) {
         target.setAttribute('data-copy', 'failure');
         clipboardTimer(target);
-        onError?.(e);
+        if (isFunction(onError)) {
+          onError(e);
+        }
       }
     );
   } else {

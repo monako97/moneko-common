@@ -65,10 +65,14 @@ export function isEqual(obj1: any, obj2: any): boolean {
    */
   function arraysEqual(arr1: any[], arr2: any[]): boolean {
     // 检查长度
-    if (arr1.length !== arr2.length) return false;
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
     // 检查数组中的每一项
     for (let i = 0, len = arr1.length; i < len; i++) {
-      if (!isEqual(arr1[i], arr2[i])) return false;
+      if (!isEqual(arr1[i], arr2[i])) {
+        return false;
+      }
     }
     return true;
   }
@@ -77,7 +81,9 @@ export function isEqual(obj1: any, obj2: any): boolean {
     // 检查对象中的每个项目
     for (const key in val1) {
       if (Object.prototype.hasOwnProperty.call(val1, key)) {
-        if (!isEqual(val1[key], val2[key])) return false;
+        if (!isEqual(val1[key], val2[key])) {
+          return false;
+        }
       }
     }
     return true;

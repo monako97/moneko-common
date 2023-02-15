@@ -1,4 +1,6 @@
-import tinycolor from 'tinycolor2';
+import tinycolor2 from 'tinycolor2';
+
+export const tinycolor = tinycolor2;
 
 type HSV = tinycolor.ColorFormats.HSV;
 
@@ -164,4 +166,5 @@ export function getColorVariableString(
   });
   return variables;
 }
+
 export default generateColor;

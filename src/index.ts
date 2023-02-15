@@ -20,5 +20,6 @@ export {
   default as generateColor,
   getColorPalette,
   getColorVariableString,
+  tinycolor,
   type ColorPatternOption,
 } from './color-formats';
