@@ -35,7 +35,10 @@ function stringToBase64Url(str: string): string {
   for (let i = outputLength - 1; i >= outputLength - paddingLength(data.length); i--) {
     output[i] = paddingChar.charCodeAt(0);
   }
-  return String.fromCharCode(...output);
+  return String.fromCharCode(...output)
+    .replace(/-/g, '+')
+    .replace(/_/g, '/')
+    .replace(/[=]==/g, 'mc+');
 }
 
 export default stringToBase64Url;
