@@ -25,6 +25,7 @@ export { default as isSvgElement } from './isSvgElement';
 export { default as isObject } from './isObject';
 export { default as isEqual } from './isEqual';
 export { default as functionType } from './functionType';
+export { default as stringToBase64Url } from './stringToBase64Url';
 export {
   default as generateColor,
   getColorPalette,
