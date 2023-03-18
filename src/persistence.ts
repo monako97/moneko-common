@@ -33,14 +33,17 @@ const persistence = {
    * @template T
    */
   set<T>(key: string, val: T): void {
-    let v: T | string = val;
+    const type = typeof val;
 
-    if (val === null || typeof val === 'undefined') {
+    if (val === null || type === 'undefined') {
       persistence.remove(key);
       return;
     }
-    if (typeof val === 'object' && val !== null) {
-      v = JSON.stringify(val);
+    const v: T | string = type === 'string' ? val : JSON.stringify(val);
+    const old = localStorage.getItem(key);
+
+    if (old === v) {
+      return;
     }
     localStorage.setItem(key, v as string);
   },
@@ -50,7 +53,9 @@ const persistence = {
    * @returns {void}
    */
   remove(key: string): void {
-    localStorage.removeItem(key);
+    if (localStorage.getItem(key) !== null) {
+      localStorage.removeItem(key);
+    }
   },
 };
 
