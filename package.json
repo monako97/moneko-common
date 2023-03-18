@@ -1,10 +1,10 @@
 {
   "name": "@moneko/common",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "common",
   "main": "lib/index.js",
   "scripts": {
-    "build": "rm -rf ./lib && tsc && swc src -d lib -C module.type=commonjs -C minify=true -C jsc.parser.syntax=typescript -C exclude=__tests__ --copy-files",
+    "build": "rm -rf ./lib && tsc && swc src -d lib -C module.type=commonjs -C jsc.target=es5 -C jsc.loose=true -C jsc.minify.mangle=true -C jsc.minify.compress=true -C minify=true -C exclude=__tests__ --copy-files",
     "test": "jest --watchAll --coverage"
   },
   "keywords": [],

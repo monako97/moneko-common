@@ -2,8 +2,11 @@ import tinycolor2 from 'tinycolor2';
 
 export const tinycolor = tinycolor2;
 
-type HSV = tinycolor.ColorFormats.HSV;
-
+interface HSV {
+  h: number;
+  s: number;
+  v: number;
+}
 const hueStep = 2; // 色相阶梯
 const saturationStep = 0.16; // 饱和度阶梯，浅色部分
 const saturationStep2 = 0.05; // 饱和度阶梯，深色部分

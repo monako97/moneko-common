@@ -1,4 +1,4 @@
-import { downloadBlob, Navigator } from '../download';
+import downloadBlob, { type Navigator } from '../downloadBlob';
 
 /**
  * @jest-environment jsdom
@@ -9,7 +9,6 @@ describe('test downloadBlob', () => {
     global.URL.createObjectURL = jest.fn(() => 'details');
 
     downloadBlob(new Blob([]), 'as');
-
     expect(global.URL.createObjectURL).toHaveBeenCalledTimes(1);
     expect(global.URL.revokeObjectURL).toHaveBeenCalledTimes(1);
   });
@@ -20,7 +19,6 @@ describe('test downloadBlob', () => {
     global.webkitURL.createObjectURL = jest.fn(() => 'details');
 
     downloadBlob(new Blob([]), 'as');
-
     expect(global.webkitURL.createObjectURL).toHaveBeenCalledTimes(1);
     expect(global.webkitURL.revokeObjectURL).toHaveBeenCalledTimes(1);
   });
@@ -29,7 +27,6 @@ describe('test downloadBlob', () => {
     (window.navigator as Navigator).msSaveBlob = jest.fn(() => 'details');
 
     downloadBlob(new Blob([]), 'as');
-
     expect((window.navigator as Navigator).msSaveBlob).toHaveBeenCalledTimes(1);
   });
 });
