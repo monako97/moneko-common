@@ -7,6 +7,7 @@ export {
   toggleFullscreen,
   requestFullscreen,
 } from './fullscreen';
+export { default as watermark, type WatermarkConfig } from './watermark';
 export { default as downloadBlob } from './downloadBlob';
 export { default as getClientSize, type ClientSize } from './getClientSize';
 export { default as setClipboard } from './setClipboard';
