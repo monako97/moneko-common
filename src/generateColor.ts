@@ -1,6 +1,4 @@
-import tinycolor2 from 'tinycolor2';
-
-export const tinycolor = tinycolor2;
+import tinycolor from './tinycolor';
 
 interface HSV {
   h: number;
@@ -137,37 +135,6 @@ function generateColor(color: string, opts: ColorPatternOption = {}): string[] {
     });
   }
   return patterns;
-}
-export const getColorPalette = (
-  color: string,
-  opt: ColorPatternOption & {
-    name: string;
-  }
-) => {
-  const colors = generateColor(color, opt);
-
-  return {
-    [`--${opt.name}-color`]: colors[5],
-    [`--${opt.name}-color-active`]: colors[6],
-    [`--${opt.name}-color-hover`]: colors[4],
-    [`--${opt.name}-color-bg`]: colors[0],
-    [`--${opt.name}-color-border`]: colors[2],
-    [`--${opt.name}-color-outline`]: tinycolor(colors[5]).setAlpha(0.2).toRgbString(),
-  };
-};
-export function getColorVariableString(
-  color: string,
-  opt: ColorPatternOption & {
-    name: string;
-  }
-): string {
-  const gen = getColorPalette(color, opt);
-  let variables = '';
-
-  Object.entries(gen).forEach((e) => {
-    variables += `${e.join(': ')};\n`;
-  });
-  return variables;
 }
 
 export default generateColor;
