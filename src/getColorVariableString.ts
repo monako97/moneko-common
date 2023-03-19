@@ -1,4 +1,5 @@
-import getColorPalette, { type ColorPatternOption } from './generateColor';
+import { type ColorPatternOption } from './generateColor';
+import getColorPalette from './getColorPalette';
 
 function getColorVariableString(
   color: string,
