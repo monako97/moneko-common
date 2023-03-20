@@ -1,4 +1,4 @@
-import hsvToRGB from './hsvToRGB';
+import hsvToRgb from './hsvToRgb';
 import type { CMYK, HSVA } from './colorParse';
 
 /**
@@ -6,9 +6,9 @@ import type { CMYK, HSVA } from './colorParse';
  * @param {HSVA} hsva 色
  * @returns {CMYK} CMYK values
  */
-function hsvToCMYK(hsva: HSVA): CMYK {
+function hsvToCmyk(hsva: HSVA): CMYK {
   const [h, s, v, a = 1] = hsva;
-  const rgb = hsvToRGB([h, s, v, a]);
+  const rgb = hsvToRgb([h, s, v, a]);
   const r = rgb[0] / 255;
   const g = rgb[1] / 255;
   const b = rgb[2] / 255;
@@ -27,4 +27,4 @@ function hsvToCMYK(hsva: HSVA): CMYK {
   return cmyk;
 }
 
-export default hsvToCMYK;
+export default hsvToCmyk;

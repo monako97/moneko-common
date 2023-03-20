@@ -1,5 +1,5 @@
-import hsvToRGB from './hsvToRGB';
-import rgbToHEX from './rgbToHEX';
+import hsvToRgb from './hsvToRgb';
+import rgbToHex from './rgbToHex';
 import type { HEXA, HSVA } from './colorParse';
 
 /**
@@ -7,8 +7,8 @@ import type { HEXA, HSVA } from './colorParse';
  * @param {HSVA} hsva 色
  * @returns {HEXA} Hexa
  */
-function hsvToHEX(hsva: HSVA): HEXA {
-  return rgbToHEX(hsvToRGB(hsva));
+function hsvToHex(hsva: HSVA): HEXA {
+  return rgbToHex(hsvToRgb(hsva));
 }
 
-export default hsvToHEX;
+export default hsvToHex;

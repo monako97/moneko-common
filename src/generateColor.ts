@@ -1,5 +1,5 @@
 import colorParse, { type HSVA } from './colorParse';
-import hsvToHEX from './hsvToHEX';
+import hsvToHex from './hsvToHex';
 import mixColor from './mixColor';
 
 const hueStep = 2; // 色相阶梯
@@ -95,7 +95,7 @@ function generateColor(color: string, opts: ColorPatternOption = {}): string[] {
 
   for (let i = lightColorCount; i > 0; i -= 1) {
     patterns.push(
-      hsvToHEX([
+      hsvToHex([
         getHue(hsv, i, true),
         getSaturation(hsv, i, true) * 100,
         getValue(hsv, i, true) * 100,
@@ -104,10 +104,10 @@ function generateColor(color: string, opts: ColorPatternOption = {}): string[] {
     );
   }
 
-  patterns.push(baseColor.toHEXA().toString());
+  patterns.push(baseColor.toHexaString());
   for (let i = 1; i <= darkColorCount; i += 1) {
     patterns.push(
-      hsvToHEX([getHue(hsv, i), getSaturation(hsv, i) * 100, getValue(hsv, i) * 100, a]).toString()
+      hsvToHex([getHue(hsv, i), getSaturation(hsv, i) * 100, getValue(hsv, i) * 100, a]).toString()
     );
   }
 

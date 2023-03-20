@@ -1,6 +1,6 @@
 {
   "name": "@moneko/common",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "common",
   "main": "lib/index.js",
   "scripts": {

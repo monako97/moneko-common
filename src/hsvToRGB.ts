@@ -5,7 +5,7 @@ import type { HSVA, RGBA } from './colorParse';
  * @param {HSVA} hsva 色
  * @returns {RGBA} RGB
  */
-function hsvToRGB(hsva: HSVA): RGBA {
+function hsvToRgb(hsva: HSVA): RGBA {
   const [h, s, v, a = 1] = hsva;
   const _h = (h / 360) * 6;
   const _s = s / 100;
@@ -25,4 +25,4 @@ function hsvToRGB(hsva: HSVA): RGBA {
   return rgba;
 }
 
-export default hsvToRGB;
+export default hsvToRgb;

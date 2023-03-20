@@ -1,21 +1,28 @@
-import cmykToHSV from './cmykToHSV';
-import hexToHSV from './hexToHSV';
-import hslToHSV from './hslToHSV';
+import cmykToHsv from './cmykToHsv';
+import hexToHsv from './hexToHsv';
+import hslToHsv from './hslToHsv';
 import hsvaToString from './hsvaToString';
-import hsvToCMYK from './hsvToCMYK';
-import hsvToHEX from './hsvToHEX';
-import hsvToHSL from './hsvToHSL';
-import hsvToRGB from './hsvToRGB';
-import rgbToHSV from './rgbToHSV';
+import hsvToCmyk from './hsvToCmyk';
+import hsvToHex from './hsvToHex';
+import hsvToHsl from './hsvToHsl';
+import hsvToRgb from './hsvToRgb';
+import rgbToHsv from './rgbToHsv';
 
 export interface ColorParse<T> {
   value: T;
   type: ColorType;
-  toHEXA(): HEXA;
-  toRGBA(): RGBA;
-  toHSLA(): HSLA;
-  toCMYK(): CMYK;
-  toHSVA(): HSVA;
+  toHexa(): HEXA;
+  toHexaString(): string;
+  toRgba(): RGBA;
+  toRgbaString(): string;
+  toHsla(): HSLA;
+  toHslaString(): string;
+  toCmyk(): CMYK;
+  toCmykString(): string;
+  toHsva(): HSVA;
+  toHsvaString(): string;
+  // eslint-disable-next-line no-unused-vars
+  setValue(value: T): ColorParse<T>;
   // eslint-disable-next-line no-unused-vars
   setAlpha(alpha: number): ColorParse<T>;
   toString(): string;
@@ -102,7 +109,7 @@ function color(str: string): Color {
         const [, c = 0, m = 0, y = 0, k = 0] = numarize(match);
 
         if (c > 100 || m > 100 || y > 100 || k > 100) break;
-        hsva = cmykToHSV([c, m, y, k]);
+        hsva = cmykToHsv([c, m, y, k]);
         type = key;
         break;
       }
@@ -110,14 +117,14 @@ function color(str: string): Color {
         const [, , , r = 0, g = 0, b = 0, a = 1] = numarize(match);
 
         if (r > 255 || g > 255 || b > 255 || a < 0 || a > 1) break;
-        hsva = rgbToHSV([r, g, b, a]);
+        hsva = rgbToHsv([r, g, b, a]);
         type = key;
         break;
       }
       case 'hexa': {
         const [, hex] = match;
 
-        hsva = hexToHSV(hex);
+        hsva = hexToHsv(hex);
         type = key;
         break;
       }
@@ -125,7 +132,7 @@ function color(str: string): Color {
         const [, , , h = 0, s = 0, l = 0, a = 1] = numarize(match);
 
         if (h > 360 || s > 100 || l > 100 || a < 0 || a > 1) break;
-        hsva = hslToHSV([h, s, l, a]);
+        hsva = hslToHsv([h, s, l, a]);
         type = key;
         break;
       }
@@ -144,12 +151,21 @@ function color(str: string): Color {
   const c: Color<'hsva'> = {
     value: hsva,
     type: type,
-    toString: () => hsvaToString(hsva),
-    toHEXA: () => hsvToHEX(hsva),
-    toRGBA: () => hsvToRGB(hsva),
-    toHSLA: () => hsvToHSL(hsva),
-    toCMYK: () => hsvToCMYK(hsva),
-    toHSVA: () => hsva,
+    toString: () => hsvaToString(c.value),
+    toHexa: () => hsvToHex(c.value),
+    toHexaString: () => hsvToHex(c.value).toString(),
+    toRgba: () => hsvToRgb(c.value),
+    toRgbaString: () => hsvToRgb(c.value).toString(),
+    toHsla: () => hsvToHsl(c.value),
+    toHslaString: () => hsvToHsl(c.value).toString(),
+    toCmyk: () => hsvToCmyk(c.value),
+    toCmykString: () => hsvToCmyk(c.value).toString(),
+    toHsva: () => c.value,
+    toHsvaString: () => hsvaToString(c.value),
+    setValue(value) {
+      c.value = value;
+      return c;
+    },
     setAlpha(alpha) {
       c.value[3] = alpha;
       return c;

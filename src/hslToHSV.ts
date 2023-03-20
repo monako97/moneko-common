@@ -6,7 +6,7 @@ import type { HSLA, HSVA } from './colorParse';
  * @param {HSLA} hsla hsla
  * @return {HSVA} HSVA
  */
-function hslToHSV(hsla: HSLA): HSVA {
+function hslToHsv(hsla: HSLA): HSVA {
   const [h, s, l, a = 1] = hsla;
   const _l = l / 100;
   let _s = s / 100;
@@ -23,4 +23,4 @@ function hslToHSV(hsla: HSLA): HSVA {
   return hsva;
 }
 
-export default hslToHSV;
+export default hslToHsv;

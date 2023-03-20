@@ -1,5 +1,5 @@
 import hsvaToString from './hsvaToString';
-import rgbToHSV from './rgbToHSV';
+import rgbToHSV from './rgbToHsv';
 import type { CMYK, HSVA } from './colorParse';
 
 /**
@@ -7,7 +7,7 @@ import type { CMYK, HSVA } from './colorParse';
  * @param {CMYK} cmyk cmyk
  * @return {HSVA} HSV values.
  */
-function cmykToHSV(cmyk: CMYK): HSVA {
+function cmykToHsv(cmyk: CMYK): HSVA {
   const [c, m, y, k] = cmyk;
   const _c = c / 100,
     _m = m / 100,
@@ -22,4 +22,4 @@ function cmykToHSV(cmyk: CMYK): HSVA {
   hsva.toString = () => hsvaToString(hsva);
   return hsva;
 }
-export default cmykToHSV;
+export default cmykToHsv;
