@@ -1,5 +1,5 @@
+import colorParse from './colorParse';
 import generateColor, { type ColorPatternOption } from './generateColor';
-import tinycolor from './tinycolor';
 
 const getColorPalette = (
   color: string,
@@ -15,7 +15,7 @@ const getColorPalette = (
     [`--${opt.name}-color-hover`]: colors[4],
     [`--${opt.name}-color-bg`]: colors[0],
     [`--${opt.name}-color-border`]: colors[2],
-    [`--${opt.name}-color-outline`]: tinycolor(colors[5]).setAlpha(0.2).toRgbString(),
+    [`--${opt.name}-color-outline`]: colorParse(color).setAlpha(0.2).toRGBA().toString(),
   };
 };
 

@@ -1,10 +1,7 @@
-import tinycolor from './tinycolor';
+import colorParse, { type HSVA } from './colorParse';
+import hsvToHEX from './hsvToHEX';
+import mixColor from './mixColor';
 
-interface HSV {
-  h: number;
-  s: number;
-  v: number;
-}
 const hueStep = 2; // 色相阶梯
 const saturationStep = 0.16; // 饱和度阶梯，浅色部分
 const saturationStep2 = 0.05; // 饱和度阶梯，深色部分
@@ -26,14 +23,14 @@ const darkColorMap = [
   { index: 1, opacity: 0.98 },
 ];
 
-function getHue(hsv: HSV, i: number, light?: boolean): number {
+function getHue(hsv: HSVA, i: number, light?: boolean): number {
   let hue: number;
   // 根据色相不同，色相转向不同
 
-  if (Math.round(hsv.h) >= 60 && Math.round(hsv.h) <= 240) {
-    hue = light ? Math.round(hsv.h) - hueStep * i : Math.round(hsv.h) + hueStep * i;
+  if (Math.floor(hsv[0]) >= 60 && Math.floor(hsv[0]) <= 240) {
+    hue = light ? Math.floor(hsv[0]) - hueStep * i : Math.floor(hsv[0]) + hueStep * i;
   } else {
-    hue = light ? Math.round(hsv.h) + hueStep * i : Math.round(hsv.h) - hueStep * i;
+    hue = light ? Math.floor(hsv[0]) + hueStep * i : Math.floor(hsv[0]) - hueStep * i;
   }
   if (hue < 0) {
     hue += 360;
@@ -43,19 +40,19 @@ function getHue(hsv: HSV, i: number, light?: boolean): number {
   return hue;
 }
 
-function getSaturation(hsv: HSV, i: number, light?: boolean): number {
+function getSaturation(hsv: HSVA, i: number, light?: boolean): number {
   // 灰色不改变饱和度
-  if (hsv.h === 0 && hsv.s === 0) {
-    return hsv.s;
+  if (hsv[0] === 0 && hsv[1] === 0) {
+    return hsv[1];
   }
   let saturation: number;
 
   if (light) {
-    saturation = hsv.s - saturationStep * i;
+    saturation = hsv[1] - saturationStep * i;
   } else if (i === darkColorCount) {
-    saturation = hsv.s + saturationStep;
+    saturation = hsv[1] + saturationStep;
   } else {
-    saturation = hsv.s + saturationStep2 * i;
+    saturation = hsv[1] + saturationStep2 * i;
   }
   // 边界值修正
   if (saturation > 1) {
@@ -71,13 +68,13 @@ function getSaturation(hsv: HSV, i: number, light?: boolean): number {
   return Number(saturation.toFixed(2));
 }
 
-function getValue(hsv: HSV, i: number, light?: boolean): number {
+function getValue(hsv: HSVA, i: number, light?: boolean): number {
   let value: number;
 
   if (light) {
-    value = hsv.v + brightnessStep1 * i;
+    value = hsv[2] + brightnessStep1 * i;
   } else {
-    value = hsv.v - brightnessStep2 * i;
+    value = hsv[2] - brightnessStep2 * i;
   }
   if (value > 1) {
     value = 1;
@@ -92,46 +89,32 @@ export interface ColorPatternOption {
 
 function generateColor(color: string, opts: ColorPatternOption = {}): string[] {
   const patterns: string[] = [];
-  const pColor = tinycolor(color);
+  const baseColor = colorParse(color);
+  const [h, s, v, a] = baseColor.value;
+  const hsv: HSVA = [h, s / 100, v / 100, a];
 
   for (let i = lightColorCount; i > 0; i -= 1) {
-    const hsv = tinycolor(pColor).toHsv();
-    const colorString: string = tinycolor(
-      tinycolor({
-        h: getHue(hsv, i, true),
-        s: getSaturation(hsv, i, true),
-        v: getValue(hsv, i, true),
-      })
-    ).toHexString();
-
-    patterns.push(colorString);
+    patterns.push(
+      hsvToHEX([
+        getHue(hsv, i, true),
+        getSaturation(hsv, i, true) * 100,
+        getValue(hsv, i, true) * 100,
+        a,
+      ]).toString()
+    );
   }
-  patterns.push(tinycolor(pColor).toHexString());
-  for (let i = 1; i <= darkColorCount; i += 1) {
-    const hsv = tinycolor(pColor).toHsv();
-    const colorString: string = tinycolor(
-      tinycolor({
-        h: getHue(hsv, i),
-        s: getSaturation(hsv, i),
-        v: getValue(hsv, i),
-      })
-    ).toHexString();
 
-    patterns.push(colorString);
+  patterns.push(baseColor.toHEXA().toString());
+  for (let i = 1; i <= darkColorCount; i += 1) {
+    patterns.push(
+      hsvToHEX([getHue(hsv, i), getSaturation(hsv, i) * 100, getValue(hsv, i) * 100, a]).toString()
+    );
   }
 
   // 暗黑模式规则
   if (opts.theme === 'dark') {
     return darkColorMap.map(({ index, opacity }) => {
-      const darkColorString: string = tinycolor(
-        tinycolor.mix(
-          tinycolor(opts.backgroundColor || '#141414'),
-          tinycolor(patterns[index]),
-          opacity * 100
-        )
-      ).toHexString();
-
-      return darkColorString;
+      return mixColor(opts.backgroundColor || '#141414', patterns[index], opacity);
     });
   }
   return patterns;
