@@ -2,6 +2,7 @@ export { default as classNames } from './classNames';
 export { default as getPrefixCls } from './getPrefixCls';
 export { default as fullscreen } from './fullscreen';
 export { default as watermark, type WatermarkConfig } from './watermark';
+export { default as updateStyleRule } from './updateStyleRule';
 export { default as downloadBlob } from './downloadBlob';
 export { default as getClientSize, type ClientSize } from './getClientSize';
 export { default as setClipboard } from './setClipboard';
