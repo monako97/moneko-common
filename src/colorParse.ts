@@ -25,12 +25,14 @@ export interface ColorParse<T> {
   setValue(value: T): ColorParse<T>;
   // eslint-disable-next-line no-unused-vars
   setAlpha(alpha: number): ColorParse<T>;
-  toString(): string;
+  // eslint-disable-next-line no-unused-vars
+  isColor: (str: string) => false | ColorType;
 }
 export type HEXA = [h: string, e: string, x: string, a: string];
 export type RGBA = [r: number, g: number, b: number, a: number];
 export type HSVA = [h: number, s: number, v: number, a: number];
 export type HSLA = [h: number, s: number, l: number, a: number];
+/** 印刷四分色模式 */
 export type CMYK = [c: number, m: number, y: number, k: number];
 
 /**
@@ -51,6 +53,7 @@ function standardizeColor(name: string): string | CanvasGradient | CanvasPattern
 }
 
 export type ColorType = keyof typeof colorRegex;
+
 // 匹配不同类型颜色表示的正则表达式
 const colorRegex = {
   cmyk: /^cmyk[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)/i,
@@ -59,7 +62,7 @@ const colorRegex = {
   hsva: /^((hsva)|hsv)[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)[\D]*?([\d.]+|$)/i,
   hexa: /^#?(([\dA-Fa-f]{3,4})|([\dA-Fa-f]{6})|([\dA-Fa-f]{8}))$/i,
 };
-const colorType = ['cmyk', 'rgba', 'hsla', 'hsva', 'hexa'];
+const colorType: ColorType[] = ['cmyk', 'rgba', 'hsla', 'hsva', 'hexa'];
 /**
  * 采用任何类型的数组，将表示数字的字符串转换为数字，将其他任何内容转换为未定义
  * @param {number[]} arr any
@@ -80,6 +83,20 @@ export type Color<T extends ColorType = 'hsva'> = T extends 'cmyk'
   : T extends 'hsva'
   ? ColorParse<HSVA>
   : ColorParse<HSVA>;
+
+function isColor(str: string) {
+  let check: ColorType | false = false;
+
+  for (let i = 0, len = colorType.length; i < len; i++) {
+    const key = colorType[i];
+
+    if (!colorRegex[key as ColorType].exec(str as string)) {
+      continue;
+    }
+    check = key;
+  }
+  return check;
+}
 /**
  * 将表示颜色的字符串解析为 HSV 数组, 通过toString()方法获取字符串值
  * 当前支持的类型是 cmyk、rgba、hsla、hexa、hsva、cmyk
@@ -148,10 +165,16 @@ function color(str: string): Color {
         break;
     }
   }
+
+  hsva.toString = () => hsvaToString(hsva);
   const c: Color<'hsva'> = {
     value: hsva,
     type: type,
-    toString: () => hsvaToString(c.value),
+    toHsva: () => {
+      c.value.toString = () => hsvaToString(c.value);
+      return c.value;
+    },
+    toHsvaString: () => c.value.toString(),
     toHexa: () => hsvToHex(c.value),
     toHexaString: () => hsvToHex(c.value).toString(),
     toRgba: () => hsvToRgb(c.value),
@@ -160,8 +183,6 @@ function color(str: string): Color {
     toHslaString: () => hsvToHsl(c.value).toString(),
     toCmyk: () => hsvToCmyk(c.value),
     toCmykString: () => hsvToCmyk(c.value).toString(),
-    toHsva: () => c.value,
-    toHsvaString: () => hsvaToString(c.value),
     setValue(value) {
       c.value = value;
       return c;
@@ -170,6 +191,7 @@ function color(str: string): Color {
       c.value[3] = alpha;
       return c;
     },
+    isColor: isColor,
   };
 
   return c;

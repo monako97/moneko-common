@@ -1,4 +1,6 @@
+import getMaxZindex from './getMaxZindex';
 import stringToBase64Url from './stringToBase64Url';
+import updateStyleRule from './updateStyleRule';
 
 /** 水印参数 */
 export type WatermarkConfig = {
@@ -84,50 +86,29 @@ function create(text: string, conf?: Partial<WatermarkConfig>): string {
  */
 function update(
   text?: string | null,
-  opt?: WatermarkConfig & {
+  opt?: Partial<WatermarkConfig> & {
     /** 水印更新的位置, CSS样式表选择器
      * @default ':root'
      */
     selector?: string;
   }
 ): void {
-  const { selector = ':root', ...c } = opt || {};
-  const old = getComputedStyle(document.documentElement).getPropertyValue('--watermark');
-  let len = document.styleSheets.length;
+  const { selector = ':root::after', ...c } = opt || {};
 
-  if (len === 0) {
-    const style = document.createElement('style');
-
-    document.head.appendChild(style);
-    len = 1;
-  }
-  let styleSheet: CSSStyleSheet = document.styleSheets.item(0) as CSSStyleSheet;
-  let rootRule: CSSStyleRule | undefined;
-
-  for (let i = 0; i < len; i++) {
-    styleSheet = document.styleSheets.item(i) as CSSStyleSheet;
-    for (let j = 0, rlen = styleSheet.cssRules.length; j < rlen; j++) {
-      const rule = styleSheet.cssRules[j] as CSSStyleRule;
-
-      if (rule.selectorText === selector && rule.style.getPropertyValue('--watermark') === old) {
-        rootRule = rule;
-        break;
-      }
-    }
-  }
-
-  if (!text) {
-    if (rootRule && old) {
-      rootRule.style.removeProperty('--watermark');
-    }
-    return;
-  }
-  if (!rootRule) {
-    styleSheet.insertRule(`${selector} {}`, styleSheet.cssRules.length);
-    rootRule = styleSheet.cssRules[styleSheet.cssRules.length - 1] as CSSStyleRule;
-  }
-  /** 更新水印 */
-  rootRule.style.setProperty('--watermark', `url(${create(text, getConfig(c))})`);
+  updateStyleRule(
+    {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      'z-index': getMaxZindex(),
+      width: '100vw',
+      height: '100vh',
+      'pointer-events': 'none',
+      content: '""',
+      'background-image': text ? `url(${create(text, getConfig(c))})` : null,
+    },
+    selector
+  );
 }
 
 const watermark = {
