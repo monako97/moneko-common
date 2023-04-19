@@ -1,5 +1,5 @@
 import hsvaToString from './hsvaToString';
-import rgbToHSV from './rgbToHsv';
+import rgbToHsv from './rgbToHsv';
 import type { CMYK, HSVA } from './colorParse';
 
 /**
@@ -17,7 +17,7 @@ function cmykToHsv(cmyk: CMYK): HSVA {
   const r = (1 - Math.min(1, _c * (1 - _k) + _k)) * 255;
   const g = (1 - Math.min(1, _m * (1 - _k) + _k)) * 255;
   const b = (1 - Math.min(1, _y * (1 - _k) + _k)) * 255;
-  const hsva: HSVA = rgbToHSV([r, g, b, 1]);
+  const hsva: HSVA = rgbToHsv([r, g, b, 1]);
 
   hsva.toString = () => hsvaToString(hsva);
   return hsva;
