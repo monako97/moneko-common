@@ -1,4 +1,13 @@
 /**
+ * 检查函数是否相等
+ * @param {A} a 第一个数组
+ * @param {B} b 第二个数组
+ * @return {Boolean} 如果它们的值相等,则返回true
+ */
+function functionEqual<A extends VoidFunction, B extends VoidFunction>(a: A, b: B): boolean {
+  return a.toString() === b.toString();
+}
+/**
  * 检查数组是否相等
  * @param {A1} one 第一个数组
  * @param {B1} arr2 第二个数组
@@ -64,7 +73,7 @@ function isEqual<A, B>(obj1: A, obj2: B): boolean {
       '[object Proxy]',
     ].includes(type)
   ) {
-    return (obj1 as VoidFunction).toString() === (obj2 as VoidFunction).toString();
+    return functionEqual(obj1 as VoidFunction, obj2 as VoidFunction);
   }
   return (obj1 as string) === (obj2 as string);
 }

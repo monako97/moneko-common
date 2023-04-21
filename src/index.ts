@@ -13,7 +13,6 @@ export { default as persistence } from './persistence';
 export { default as getDataType } from './getDataType';
 export { default as cloneDeep } from './cloneDeep';
 export { default as passiveSupported } from './passiveSupported';
-export { default as functionEqual } from './functionEqual';
 export { default as isFunction } from './isFunction';
 export { default as isUndefined } from './isUndefined';
 export { default as isString } from './isString';
