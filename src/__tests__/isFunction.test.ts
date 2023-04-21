@@ -5,5 +5,6 @@ describe('test data-judgment', () => {
     expect(false).toBe(isFunction(null));
     expect(false).toBe(isFunction({ a: 1 }));
     expect(true).toBe(isFunction(() => false));
+    expect(true).toBe(isFunction(async () => await new Promise(() => false)));
   });
 });

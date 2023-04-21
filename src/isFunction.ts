@@ -1,15 +1,11 @@
-import functionType from './functionType';
-import getDataType from './getDataType';
-import isObject from './isObject';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, no-unused-vars
-export type Func = (...args: any) => any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isFunction(target: any): target is VoidFunction | Func {
-  if (!isObject(target)) return false;
-  const tagType = getDataType(target);
-
-  return functionType.includes(tagType);
+// eslint-disable-next-line no-unused-vars
+function isFunction(target: unknown): target is VoidFunction | ((...v: unknown[]) => unknown) {
+  return [
+    '[object Function]',
+    '[object AsyncFunction]',
+    '[object GeneratorFunction]',
+    '[object Proxy]',
+  ].includes(Object.prototype.toString.call(target));
 }
 
 export default isFunction;
