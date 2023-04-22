@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-function isFunction(target: any): target is VoidFunction | ((...v: any[]) => any) {
+function isFunction(target: any): target is VoidFunction & ((...v: any[]) => any) {
   return [
     '[object Function]',
     '[object AsyncFunction]',
