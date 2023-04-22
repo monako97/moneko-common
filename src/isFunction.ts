@@ -1,5 +1,5 @@
-// eslint-disable-next-line no-unused-vars
-function isFunction(target: unknown): target is VoidFunction | ((...v: unknown[]) => unknown) {
+// eslint-disable-next-line
+function isFunction(target: any): target is VoidFunction | ((...v: any[]) => any) {
   return [
     '[object Function]',
     '[object AsyncFunction]',
