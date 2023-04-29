@@ -21,6 +21,11 @@ export interface ColorParse<T> {
   toCmykString(): string;
   toHsva(): HSVA;
   toHsvaString(): string;
+  /**
+   * 互补颜色
+   * @returns {string} color
+   */
+  complement(): string;
   // eslint-disable-next-line no-unused-vars
   setValue(value: T): ColorParse<T>;
   // eslint-disable-next-line no-unused-vars
@@ -170,6 +175,11 @@ function color(str: string): Color {
   const c: Color<'hsva'> = {
     value: hsva,
     type: type,
+    complement: () => {
+      const [r, g, b, a] = c.toRgba();
+
+      return `rgba(${255 - r},${255 - g},${255 - b},${a})`;
+    },
     toHsva: () => {
       c.value.toString = () => hsvaToString(c.value);
       return c.value;
