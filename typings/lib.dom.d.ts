@@ -1,4 +1,5 @@
-/** FullScreen */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 interface Element
   extends Node,
     Animatable,
@@ -13,7 +14,6 @@ interface Element
 }
 interface Document
   extends Node,
-    DocumentAndElementEventHandlers,
     DocumentOrShadowRoot,
     GlobalEventHandlers,
     NonElementParentNode,
