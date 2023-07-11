@@ -6,20 +6,28 @@ import hsvToCmyk from './hsvToCmyk';
 import hsvToHex from './hsvToHex';
 import hsvToHsl from './hsvToHsl';
 import hsvToRgb from './hsvToRgb';
+import isColor, { type ColorType } from './isColor';
 import rgbToHsv from './rgbToHsv';
+
+export type HEXA = [h: string, e: string, x: string, a: string];
+export type RGBA = [r: number, g: number, b: number, a: number];
+export type HSVA = [h: number, s: number, v: number, a: number];
+export type HSLA = [h: number, s: number, l: number, a: number];
+/** 印刷四分色模式 */
+export type CMYK = [c: number, m: number, y: number, k: number];
 
 export interface ColorParse<T> {
   value: T;
   type: ColorType;
   toHexa(): HEXA;
   toHexaString(): string;
-  toRgba(): RGBA;
+  toRgba(): RGBA & { max: MaxNum['rgba'] };
   toRgbaString(): string;
-  toHsla(): HSLA;
+  toHsla(): HSLA & { max: MaxNum['hsla'] };
   toHslaString(): string;
-  toCmyk(): CMYK;
+  toCmyk(): CMYK & { max: MaxNum['cmyk'] };
   toCmykString(): string;
-  toHsva(): HSVA;
+  toHsva(): HSVA & { max: MaxNum['hsva'] };
   toHsvaString(): string;
   /**
    * 互补颜色
@@ -30,52 +38,20 @@ export interface ColorParse<T> {
   setValue(value: T): ColorParse<T>;
   // eslint-disable-next-line no-unused-vars
   setAlpha(alpha: number): ColorParse<T>;
-  // eslint-disable-next-line no-unused-vars
-  isColor: (str: string) => false | ColorType;
-}
-export type HEXA = [h: string, e: string, x: string, a: string];
-export type RGBA = [r: number, g: number, b: number, a: number];
-export type HSVA = [h: number, s: number, v: number, a: number];
-export type HSLA = [h: number, s: number, l: number, a: number];
-/** 印刷四分色模式 */
-export type CMYK = [c: number, m: number, y: number, k: number];
-
-/**
- * 将颜色名称转换为 rgb/十六进制
- * @param {string} name 颜色名称
- * @returns {string | CanvasGradient | CanvasPattern} color
- */
-function standardizeColor(name: string): string | CanvasGradient | CanvasPattern | null {
-  // 由于无效颜色将被解析为黑色，因此将其过滤掉
-  if (name.toLowerCase() === 'black') {
-    return '#000000';
-  }
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const ctx = document.createElement('canvas').getContext('2d')!;
-
-  ctx.fillStyle = name;
-  return ctx.fillStyle === '#000000' ? null : ctx.fillStyle;
 }
 
-export type ColorType = keyof typeof colorRegex;
-
-// 匹配不同类型颜色表示的正则表达式
-const colorRegex = {
-  cmyk: /^cmyk[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)/i,
-  rgba: /^((rgba)|rgb)[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)[\D]*?([\d.]+|$)/i,
-  hsla: /^((hsla)|hsl)[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)[\D]*?([\d.]+|$)/i,
-  hsva: /^((hsva)|hsv)[\D]+([\d.]+)[\D]+([\d.]+)[\D]+([\d.]+)[\D]*?([\d.]+|$)/i,
-  hexa: /^#?(([\dA-Fa-f]{3,4})|([\dA-Fa-f]{6})|([\dA-Fa-f]{8}))$/i,
+export type MaxNum = {
+  cmyk: [100, 100, 100, 100];
+  hsla: [360, 100, 100, 1];
+  hsva: [360, 100, 100, 1];
+  rgba: [255, 255, 255, 1];
 };
-const colorType: ColorType[] = ['cmyk', 'rgba', 'hsla', 'hsva', 'hexa'];
-/**
- * 采用任何类型的数组，将表示数字的字符串转换为数字，将其他任何内容转换为未定义
- * @param {number[]} arr any
- * @return {*} s
- */
-const numarize = (arr: string[]) =>
-  // eslint-disable-next-line no-undefined
-  arr.map((v: string) => (/^(|\d+)\.\d+|\d+$/.test(v) ? Number(v) : undefined));
+export const maxNum: MaxNum = {
+  cmyk: [100, 100, 100, 100],
+  hsla: [360, 100, 100, 1],
+  hsva: [360, 100, 100, 1],
+  rgba: [255, 255, 255, 1],
+};
 
 export type Color<T extends ColorType = 'hsva'> = T extends 'cmyk'
   ? ColorParse<CMYK>
@@ -86,22 +62,9 @@ export type Color<T extends ColorType = 'hsva'> = T extends 'cmyk'
   : T extends 'hexa'
   ? ColorParse<HEXA>
   : T extends 'hsva'
-  ? ColorParse<HSVA>
-  : ColorParse<HSVA>;
+  ? ColorParse<HSVA & { max: MaxNum['hsva'] }>
+  : ColorParse<HSVA & { max: MaxNum['hsva'] }>;
 
-function isColor(str: string) {
-  let check: ColorType | false = false;
-
-  for (let i = 0, len = colorType.length; i < len; i++) {
-    const key = colorType[i];
-
-    if (!colorRegex[key as ColorType].exec(str as string)) {
-      continue;
-    }
-    check = key;
-  }
-  return check;
-}
 /**
  * 将表示颜色的字符串解析为 HSV 数组, 通过toString()方法获取字符串值
  * 当前支持的类型是 cmyk、rgba、hsla、hexa、hsva、cmyk
@@ -109,72 +72,91 @@ function isColor(str: string) {
  * @return {*} HSVA
  */
 function color(str: string): Color {
-  const defaultHsva: HSVA = [0, 0, 0, 1];
-  let hsva: HSVA = defaultHsva;
-  let type: ColorType = 'hsva';
+  /**
+   * 将颜色名称转换为 rgb/十六进制
+   * @param {string} colorStr 颜色名称
+   * @returns {string | CanvasGradient | CanvasPattern} color
+   */
+  function standardizeColor(colorStr: string): string | null {
+    if (!colorStr.match(/^[a-zA-Z]+$/)) {
+      return colorStr;
+    }
+    // 由于无效颜色将被解析为黑色，因此将其过滤掉
+    if (colorStr.toLowerCase() === 'black') {
+      return '#000000';
+    }
+    const ctx = document.createElement('canvas').getContext('2d');
+
+    if (!ctx) {
+      return null;
+    }
+    ctx.fillStyle = colorStr;
+    return ctx.fillStyle === '#000000' ? null : ctx.fillStyle;
+  }
+
+  /**
+   * 采用任何类型的数组，将表示数字的字符串转换为数字，将其他任何内容转换为未定义
+   * @param {number[]} arr any
+   * @return {(number | undefined)[]} s
+   */
+  function numarize(arr: string[]): (number | undefined)[] {
+    // eslint-disable-next-line no-undefined
+    return arr.map((v: string) => (/^(|\d+)\.\d+|\d+$/.test(v) ? Number(v) : undefined));
+  }
+  let hsva = [0, 0, 0, 1] as HSVA & { max: MaxNum['hsva'] };
   // 检查字符串是否是颜色名称
-  const _str = str.match(/^[a-zA-Z]+$/) ? standardizeColor(str) : str;
+  const colorMatch = isColor(standardizeColor(str));
+  const type = colorMatch?.type || 'hsva';
+  const match = colorMatch?.match || ([0, 0, 0, 1] as unknown as RegExpExecArray);
 
-  let match;
+  switch (type) {
+    case 'cmyk': {
+      const [, c = 0, m = 0, y = 0, k = 0] = numarize(match);
+      const max = maxNum[type];
 
-  for (let i = 0, len = colorType.length; i < len; i++) {
-    const key = colorType[i];
-
-    // 检查当前方案是否通过
-    if (!(match = colorRegex[key as ColorType].exec(_str as string))) {
-      continue;
+      if (c > max[0] || m > max[1] || y > max[2] || k > max[3]) break;
+      hsva = cmykToHsv([c, m, y, k]);
+      break;
     }
-    // match[2] 仅在 rgba、hsla 或 hsla 匹配时才包含真实值
-    // const alpha = !!match[2];
-    switch (key) {
-      case 'cmyk': {
-        const [, c = 0, m = 0, y = 0, k = 0] = numarize(match);
+    case 'rgba': {
+      const [, , , r = 0, g = 0, b = 0, a = 1] = numarize(match);
+      const max = maxNum[type];
 
-        if (c > 100 || m > 100 || y > 100 || k > 100) break;
-        hsva = cmykToHsv([c, m, y, k]);
-        type = key;
-        break;
-      }
-      case 'rgba': {
-        const [, , , r = 0, g = 0, b = 0, a = 1] = numarize(match);
-
-        if (r > 255 || g > 255 || b > 255 || a < 0 || a > 1) break;
-        hsva = rgbToHsv([r, g, b, a]);
-        type = key;
-        break;
-      }
-      case 'hexa': {
-        const [, hex] = match;
-
-        hsva = hexToHsv(hex);
-        type = key;
-        break;
-      }
-      case 'hsla': {
-        const [, , , h = 0, s = 0, l = 0, a = 1] = numarize(match);
-
-        if (h > 360 || s > 100 || l > 100 || a < 0 || a > 1) break;
-        hsva = hslToHsv([h, s, l, a]);
-        type = key;
-        break;
-      }
-      case 'hsva': {
-        const [, , , h = 0, s = 0, v = 0, a = 1] = numarize(match);
-
-        if (h > 360 || s > 100 || v > 100 || a < 0 || a > 1) break;
-        hsva = [h, s, v, a];
-        type = key;
-        break;
-      }
-      default:
-        break;
+      if (r > max[0] || g > max[1] || b > max[2] || a < 0 || a > max[3]) break;
+      hsva = rgbToHsv([r, g, b, a]);
+      break;
     }
+    case 'hexa': {
+      const [, hex] = match;
+
+      hsva = hexToHsv(hex);
+      break;
+    }
+    case 'hsla': {
+      const [, , , h = 0, s = 0, l = 0, a = 1] = numarize(match);
+      const max = maxNum[type];
+
+      if (h > max[0] || s > max[1] || l > max[2] || a < 0 || a > max[3]) break;
+      hsva = hslToHsv([h, s, l, a]);
+      break;
+    }
+    case 'hsva': {
+      const [, , , h = 0, s = 0, v = 0, a = 1] = numarize(match);
+      const max = maxNum[type];
+
+      if (h > max[0] || s > max[1] || v > max[2] || a < 0 || a > max[3]) break;
+      hsva = [h, s, v, a] as HSVA & { max: MaxNum['hsva'] };
+      break;
+    }
+    default:
+      break;
   }
 
   hsva.toString = () => hsvaToString(hsva);
+  hsva.max = maxNum.hsva;
   const c: Color<'hsva'> = {
     value: hsva,
-    type: type,
+    type: colorMatch?.type || 'hsva',
     complement: () => {
       const [r, g, b, a] = c.toRgba();
 
@@ -182,6 +164,7 @@ function color(str: string): Color {
     },
     toHsva: () => {
       c.value.toString = () => hsvaToString(c.value);
+      c.value.max = maxNum.hsva;
       return c.value;
     },
     toHsvaString: () => c.value.toString(),
@@ -201,7 +184,6 @@ function color(str: string): Color {
       c.value[3] = alpha;
       return c;
     },
-    isColor: isColor,
   };
 
   return c;

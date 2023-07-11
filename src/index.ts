@@ -36,7 +36,6 @@ export { default as hsvaToString } from './hsvaToString';
 export {
   default as colorParse,
   type ColorParse,
-  type ColorType,
   type HEXA,
   type HSLA,
   type HSVA,
@@ -44,3 +43,5 @@ export {
   type CMYK,
   type Color,
 } from './colorParse';
+export { default as isColor, type ColorType, type ColorMatch } from './isColor';
+export { default as isElementInside } from './isElementInside';

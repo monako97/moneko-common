@@ -1,12 +1,12 @@
 import rgbToHsv from './rgbToHsv';
-import type { HSVA } from './colorParse';
+import type { HSVA, MaxNum } from './colorParse';
 
 /**
  * 将 HEX 转换为 HSV
  * @param {number} hex RGB 颜色的十六进制字符串，长度可以是 3 或 6
  * @return {HSVA} HSV values.
  */
-function hexToHsv(hex: string): HSVA {
+function hexToHsv(hex: string): HSVA & { max: MaxNum['hsva'] } {
   let _hex = hex.replace(/^#/, '');
 
   if (hex.length === 4 || hex.length === 3) {

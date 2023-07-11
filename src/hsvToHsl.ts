@@ -1,11 +1,11 @@
-import type { HSLA, HSVA } from './colorParse';
+import { maxNum, type HSLA, type HSVA, type MaxNum } from './colorParse';
 
 /**
  * 将 HSV 光谱转换为 HSL
  * @param {HSVA} hsva 色
  * @returns {HSLA} HSL values
  */
-function hsvToHsl(hsva: HSVA): HSLA {
+function hsvToHsl(hsva: HSVA): HSLA & { max: MaxNum['hsla'] } {
   const [h, s, v, a = 1] = hsva;
   let _s = s / 100;
   const _v = v / 100;
@@ -20,7 +20,7 @@ function hsvToHsl(hsva: HSVA): HSLA {
       _s = (_s * _v) / (2 - l * 2);
     }
   }
-  const hsla: HSLA = [h, Math.floor(_s * 100), Math.floor(l * 100), a];
+  const hsla = [h, Math.floor(_s * 100), Math.floor(l * 100), a] as HSLA & { max: MaxNum['hsla'] };
 
   hsla.toString = () => {
     if (hsla[3] && hsla[3] < 1) {
@@ -28,6 +28,7 @@ function hsvToHsl(hsva: HSVA): HSLA {
     }
     return `hsl(${hsla[0]}, ${hsla[1]}%, ${hsla[2]}%)`;
   };
+  hsla.max = maxNum.hsla;
   return hsla;
 }
 export default hsvToHsl;
