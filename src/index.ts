@@ -33,6 +33,8 @@ export { default as rgbToHsv } from './rgbToHsv';
 export { default as rgbToHex } from './rgbToHex';
 export { default as mixColor } from './mixColor';
 export { default as hsvaToString } from './hsvaToString';
+export { default as frameCallback } from './frameCallback';
+export { default as onLCP } from './onLCP';
 export {
   default as colorParse,
   type ColorParse,

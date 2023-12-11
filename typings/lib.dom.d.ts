@@ -26,3 +26,8 @@ interface Document
   webkitFullscreenElement: Element | null;
   mozFullScreenElement: any;
 }
+
+interface PerformanceEntry {
+  renderTime: number;
+  loadTime: number;
+}
