@@ -14,14 +14,14 @@
     "lib"
   ],
   "devDependencies": {
-    "@swc/cli": "0.3.9",
-    "@swc/core": "1.3.107",
-    "@swc/jest": "0.2.31",
-    "@types/jest": "29.5.11",
-    "eslint-config-neko": "2.3.1",
+    "@swc/cli": "0.3.12",
+    "@swc/core": "1.4.11",
+    "@swc/jest": "0.2.36",
+    "@types/jest": "29.5.12",
+    "eslint-config-neko": "2.4.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "ts-node": "10.9.2",
-    "typescript": "5.3.3"
+    "typescript": "5.4.3"
   }
 }
