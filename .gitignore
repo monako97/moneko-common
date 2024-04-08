@@ -2,9 +2,10 @@
 .DS_Store
 .vscode
 node_modules
+coverage
 dist
 lib
 types
 package-lock.json
 yarn.lock
-coverage
+pnpm-lock.yaml
