@@ -61,7 +61,7 @@ function isEqual<A, B>(obj1: A, obj2: B): boolean {
     return false;
   }
   // 根据类型比较
-  if (type === '[object Array]') {
+  if (Array.isArray(obj1) && Array.isArray(obj2)) {
     return arrayEqual(obj1 as [], obj2 as []);
   } else if (type === '[object Object]') {
     return objectEqual(obj1 as object, obj2 as object);

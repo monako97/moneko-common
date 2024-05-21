@@ -5,6 +5,7 @@ node_modules
 coverage
 dist
 lib
+esm
 types
 package-lock.json
 yarn.lock
