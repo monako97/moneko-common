@@ -17,11 +17,10 @@ jobs:
           node-version: 20
           registry-url: 'https://registry.npmjs.org'
       - name: 'Setup pnpm'
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
-          version: 8
-      - name: 'install'
-        run: pnpm install
+          version: 9
+          run_install: true
       - name: 'Build Artifact'
         run: pnpm run build
       - name: 'Publish to npm'
