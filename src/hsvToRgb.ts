@@ -1,4 +1,4 @@
-import { maxNum, type HSVA, type RGBA, type MaxNum } from './colorParse';
+import { type HSVA, type MaxNum, type RGBA, maxNum } from './colorParse';
 
 /**
  * 将 HSV 光谱转换为 RGB

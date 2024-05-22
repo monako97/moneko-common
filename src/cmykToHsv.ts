@@ -1,4 +1,4 @@
-import { maxNum, type CMYK, type HSVA, type MaxNum } from './colorParse';
+import { type CMYK, type HSVA, type MaxNum, maxNum } from './colorParse';
 import hsvaToString from './hsvaToString';
 import rgbToHsv from './rgbToHsv';
 
