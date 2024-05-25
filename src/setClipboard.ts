@@ -11,7 +11,7 @@ function setClipboard(
   text: string,
   target?: Element,
   // eslint-disable-next-line no-unused-vars
-  onError?: (e: string) => void
+  onError?: (e: string) => void,
 ): void {
   const clipboardTimer = (t: HTMLElement | Element) => {
     let c: number | null = window.setTimeout(() => {
@@ -23,6 +23,8 @@ function setClipboard(
       let e: number | null = window.setTimeout(() => {
         t.removeAttribute('data-copy-exit');
         t.removeAttribute('data-copy');
+        t.removeAttribute('role');
+        t.removeAttribute('aria-live');
         if (e !== null) {
           window.clearTimeout(e);
           e = null;
@@ -46,6 +48,8 @@ function setClipboard(
     navigator.clipboard.writeText(text).then(
       function () {
         target.setAttribute('data-copy', 'success');
+        target.setAttribute('role', 'alert');
+        target.setAttribute('aria-live', 'assertive');
         clipboardTimer(target);
       },
       function (e) {
@@ -54,7 +58,7 @@ function setClipboard(
         if (isFunction(onError)) {
           onError(e);
         }
-      }
+      },
     );
   } else {
     navigator.clipboard.writeText(text);
