@@ -17,8 +17,8 @@ describe('test data-judgment', () => {
           a: () => {
             console.log('a');
           },
-        }
-      )
+        },
+      ),
     );
     expect(false).toBe(isEqual([1], []));
     expect(true).toBe(isEqual([1, { a: 's' }], [1, { a: 's' }]));

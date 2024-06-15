@@ -35,7 +35,8 @@ function stringToBase64Url(str: string): string {
   for (let i = outputLength - 1; i >= outputLength - paddingLength(data.length); i--) {
     output[i] = paddingChar.charCodeAt(0);
   }
-  return String.fromCharCode(...output)
+  return new TextDecoder()
+    .decode(output)
     .replace(/-/g, '+')
     .replace(/_/g, '/')
     .replace(/[=]==/g, 'mc+');

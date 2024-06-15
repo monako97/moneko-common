@@ -74,7 +74,7 @@ function create(text: string, conf?: Partial<WatermarkConfig>): string {
       c.y
     }" stroke-opacity="${c.opacity}" stroke="${c.color}" font-size="${c.fontSize}" font-family="${
       c.fontFamily
-    }" transform="rotate(${c.angle} ${c.width / 2} ${c.height / 2})">${text}</text></svg>`
+    }" transform="rotate(${c.angle} ${c.width / 2} ${c.height / 2})">${text}</text></svg>`,
   )}`;
 }
 
@@ -91,7 +91,7 @@ function update(
      * @default ':root'
      */
     selector?: string;
-  }
+  },
 ): void {
   const { selector = ':root::after', ...c } = opt || {};
 
@@ -107,7 +107,7 @@ function update(
       content: '""',
       'background-image': text ? `url(${create(text, getConfig(c))})` : null,
     },
-    selector
+    selector,
   );
 }
 
