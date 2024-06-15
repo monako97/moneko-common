@@ -1,7 +1,7 @@
 {
   "name": "@moneko/common",
   "description": "common",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "module": "esm/index.js",
@@ -10,7 +10,9 @@
       "require": "./lib/index.js",
       "import": "./esm/index.js"
     },
-    "./*": ["./*"]
+    "./*": [
+      "./*"
+    ]
   },
   "scripts": {
     "prebuild": "rm -rf ./lib && rm -rf ./esm && tsc",
