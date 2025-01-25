@@ -48,3 +48,5 @@ export {
 export { default as isColor, type ColorType, type ColorMatch } from './isColor';
 export { default as isElementInside } from './isElementInside';
 export { default as printBanner } from './printBanner';
+export { default as uuid } from './uuid';
+export { default as textBounding } from './textBounding';
