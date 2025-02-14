@@ -12,18 +12,25 @@
  *
  * console.log({ width, height });
  */
-function textBounding(initFontSize = '14px') {
+function textBounding(initFontSize = '14px', declaration: Partial<Omit<CSSStyleDeclaration, 'cssText'>> = {}) {
   const map = new Map<string, [width: number, height: number]>();
-  const cssText = `position: absolute; visibility: hidden; height: auto; width: auto; white-space: pre; font-size: ${initFontSize};`;
+  const cssText = `position:absolute;visibility:hidden;height:auto;width:auto;white-space:pre;font-size:${initFontSize};`;
 
   return function (text: string | number, fontSize = initFontSize) {
-    const key = `${text}${fontSize}`;
+    const key = `${text}${fontSize}${JSON.stringify(declaration)}`;
 
     if (!map.has(key)) {
       const div = document.createElement('div');
 
       div.style.cssText = cssText;
       div.style.fontSize = fontSize;
+      for (const key in declaration) {
+        if (Object.prototype.hasOwnProperty.call(declaration, key)) {
+          if (declaration[key]) {
+            div.style[key] = declaration[key];
+          }
+        }
+      }
       div.textContent = `${text}`;
       document.body.appendChild(div);
       const rect = div.getBoundingClientRect();
