@@ -20,6 +20,7 @@ export { default as isString } from './isString';
 export { default as isSvgElement } from './isSvgElement';
 export { default as isObject } from './isObject';
 export { default as isEqual } from './isEqual';
+export { default as isProxy } from './isProxy';
 export { default as stringToBase64Url } from './stringToBase64Url';
 export { default as throttle, type ThrottleOptions } from './throttle';
 export { default as cmykToHsv } from './cmykToHsv';
