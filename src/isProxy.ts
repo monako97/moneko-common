@@ -6,11 +6,7 @@ import getDataType from './getDataType';
  * @returns {boolean} boolean
  */
 function isProxy(obj: unknown): boolean {
-  return (
-    obj !== null &&
-    typeof obj === 'object' &&
-    (obj.constructor.name === 'Proxy' || getDataType(obj) === '[object Proxy]')
-  );
+  return obj !== null && typeof obj === 'object' && getDataType(obj) === '[object Proxy]';
 }
 
 export default isProxy;
