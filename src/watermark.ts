@@ -5,10 +5,10 @@ import updateStyleRule from './updateStyleRule';
 /** 水印参数 */
 export type WatermarkConfig = {
   /** 水印文字X轴位置
-   * @default 50 */
+   * @default width / 2 */
   x: number;
   /** 水印文字Y轴位置
-   * @default 50 */
+   * @default height / 2 */
   y: number;
   /** 水印宽度
    * @default 100 */
@@ -20,13 +20,13 @@ export type WatermarkConfig = {
    * @default 14 */
   fontSize: number;
   /** 水印文字旋转角度
-   * @default -45 */
+   * @default -15 */
   angle: number;
   /** 水印文字透明度
-   * @default 0.05 */
+   * @default 0.03 */
   opacity: number;
   /** 水印文字颜色
-   * @default '#000' */
+   * @default '#000000' */
   color: string;
   /** 水印文字字体
    * @default 'PingFangSC-Ultralight,sans-serif' */
@@ -35,20 +35,20 @@ export type WatermarkConfig = {
 
 function getConfig(c?: Partial<WatermarkConfig>): WatermarkConfig {
   const {
-    x = 50,
-    y = 50,
-    width = 100,
+    x,
+    y,
+    width = 180,
     height = 100,
     fontSize = 14,
-    angle = -45,
-    opacity = 0.05,
-    color = '#000',
+    angle = -15,
+    opacity = 0.03,
+    color = '#000000',
     fontFamily = 'PingFangSC-Ultralight,sans-serif',
   } = c || {};
 
   return {
-    x,
-    y,
+    x: x ?? width / 2,
+    y: y ?? height / 2,
     width,
     height,
     fontSize,
