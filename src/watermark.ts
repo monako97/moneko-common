@@ -28,6 +28,9 @@ export type WatermarkConfig = {
   /** 水印文字颜色
    * @default '#000000' */
   color: string;
+  /** 水印字重
+   * @default 100 */
+  fontWeight: number;
   /** 水印文字字体
    * @default 'PingFangSC-Ultralight,sans-serif' */
   fontFamily: string;
@@ -43,7 +46,8 @@ function getConfig(c?: Partial<WatermarkConfig>): WatermarkConfig {
     angle = -15,
     opacity = 0.03,
     color = '#000000',
-    fontFamily = 'PingFangSC-Ultralight,sans-serif',
+    fontWeight = 100,
+    fontFamily = 'system-ui-thin, PingFangSC-Thin, Microsoft YaHei Light, Microsoft JhengHei Light, Yu Gothic Light, sans-serif',
   } = c || {};
 
   return {
@@ -55,6 +59,7 @@ function getConfig(c?: Partial<WatermarkConfig>): WatermarkConfig {
     angle,
     opacity,
     color,
+    fontWeight,
     fontFamily,
   };
 }
@@ -74,7 +79,7 @@ function create(text: string, conf?: Partial<WatermarkConfig>): string {
       c.y
     }" stroke-opacity="${c.opacity}" stroke="${c.color}" font-size="${c.fontSize}" font-family="${
       c.fontFamily
-    }" transform="rotate(${c.angle} ${c.width / 2} ${c.height / 2})">${text}</text></svg>`,
+    }" font-weight="${c.fontWeight}" transform="rotate(${c.angle} ${c.width / 2} ${c.height / 2})">${text}</text></svg>`,
   )}`;
 }
 
