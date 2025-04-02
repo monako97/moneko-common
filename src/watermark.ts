@@ -1,20 +1,26 @@
 import getMaxZindex from './getMaxZindex';
 import stringToBase64Url from './stringToBase64Url';
+import textBounding from './textBounding';
 import updateStyleRule from './updateStyleRule';
 
+const normalFontFamily: string =
+  'system-ui-thin, PingFangSC-Thin, Microsoft YaHei Light, Microsoft JhengHei Light, Yu Gothic Light, sans-serif';
+const getTextBounding = textBounding('14px', {
+  fontFamily: normalFontFamily,
+  fontWeight: '100',
+});
+
 /** 水印参数 */
-export type WatermarkConfig = {
+export interface WatermarkConfig {
   /** 水印文字X轴位置
    * @default width / 2 */
   x: number;
   /** 水印文字Y轴位置
    * @default height / 2 */
   y: number;
-  /** 水印宽度
-   * @default 100 */
+  /** 水印宽度; 默认根据水印文字计算 */
   width: number;
-  /** 水印高度
-   * @default 100 */
+  /** 水印高度; 默认根据水印文字计算 */
   height: number;
   /** 水印文字大小
    * @default 14 */
@@ -32,30 +38,31 @@ export type WatermarkConfig = {
    * @default 100 */
   fontWeight: number;
   /** 水印文字字体
-   * @default 'PingFangSC-Ultralight,sans-serif' */
+   * @default 'system-ui-thin, PingFangSC-Thin, Microsoft YaHei Light, Microsoft JhengHei Light, Yu Gothic Light, sans-serif' */
   fontFamily: string;
-};
+}
 
-function getConfig(c?: Partial<WatermarkConfig>): WatermarkConfig {
+function getConfig(text: string, conf: Partial<WatermarkConfig> = {}): WatermarkConfig {
+  const size = (conf as WatermarkConfig).fontSize || 14;
+  const rect = getTextBounding(text, `${size}px`);
   const {
     x,
     y,
-    width = 180,
-    height = 100,
-    fontSize = 14,
+    width = rect[0] * 1.5,
+    height = rect[1] < 100 ? 100 : rect[1],
     angle = -15,
     opacity = 0.03,
     color = '#000000',
     fontWeight = 100,
-    fontFamily = 'system-ui-thin, PingFangSC-Thin, Microsoft YaHei Light, Microsoft JhengHei Light, Yu Gothic Light, sans-serif',
-  } = c || {};
+    fontFamily = normalFontFamily,
+  } = conf;
 
   return {
     x: x ?? width / 2,
     y: y ?? height / 2,
     width,
     height,
-    fontSize,
+    fontSize: size,
     angle,
     opacity,
     color,
@@ -70,7 +77,7 @@ function getConfig(c?: Partial<WatermarkConfig>): WatermarkConfig {
  * @returns {string} - 水印背景图的base64 url
  */
 function create(text: string, conf?: Partial<WatermarkConfig>): string {
-  const c = getConfig(conf);
+  const c: WatermarkConfig = getConfig(text, conf);
 
   return `data:image/svg+xml;base64,${stringToBase64Url(
     `<svg xmlns="http://www.w3.org/2000/svg" width="${c.width}" height="${
@@ -91,7 +98,7 @@ function create(text: string, conf?: Partial<WatermarkConfig>): string {
  */
 function update(
   text?: string | null,
-  opt?: Partial<WatermarkConfig> & {
+  opt?: WatermarkConfig & {
     /** 水印更新的位置, CSS样式表选择器
      * @default ':root'
      */
@@ -110,7 +117,7 @@ function update(
       height: '100vh',
       'pointer-events': 'none',
       content: '""',
-      'background-image': text ? `url(${create(text, getConfig(c))})` : null,
+      'background-image': text ? `url(${create(text, getConfig(text, c))})` : null,
     },
     selector,
   );
