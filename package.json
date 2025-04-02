@@ -1,7 +1,7 @@
 {
   "name": "@moneko/common",
   "description": "common",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "module": "esm/index.js",
