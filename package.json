@@ -1,7 +1,7 @@
 {
   "name": "@moneko/common",
   "description": "common",
-  "version": "1.7.6",
+  "version": "1.7.7",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "module": "esm/index.js",
@@ -23,6 +23,7 @@
   "keywords": [],
   "author": "moneko",
   "license": "MIT",
+  "sideEffects": false,
   "files": [
     "lib",
     "esm",
