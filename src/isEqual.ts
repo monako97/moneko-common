@@ -19,7 +19,9 @@ function getProxyHandler<T>(obj: { handler?: T }): T {
 }
 
 function toStringEqual(value: unknown, other: unknown) {
-  return (value as {}).toString() === (other as {}).toString();
+  return (
+    (value as Record<string, string>).toString() === (other as Record<string, string>).toString()
+  );
 }
 
 /**
@@ -101,6 +103,7 @@ function isEqual(value: unknown, other: unknown, cache = new WeakMap()): boolean
       if (val1.size !== val2.size) return false;
       for (const item of val1) {
         let found = false;
+
         for (const otherItem of val2) {
           if (isEqual(item, otherItem, cache)) {
             found = true;
@@ -169,6 +172,7 @@ function isEqual(value: unknown, other: unknown, cache = new WeakMap()): boolean
     for (const key of valueKeys) {
       const left = (val1 as Record<string, WeakKey>)[key as string];
       const right = (val2 as Record<string, WeakKey>)[key as string];
+
       if (!Object.prototype.hasOwnProperty.call(other, key) || !isEqual(left, right, cache)) {
         return false;
       }

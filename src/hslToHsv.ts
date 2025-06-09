@@ -1,4 +1,4 @@
-import { maxNum, type HSLA, type HSVA, type MaxNum } from './colorParse';
+import { type HSLA, type HSVA, type MaxNum, maxNum } from './colorParse';
 import hsvaToString from './hsvaToString';
 
 /**

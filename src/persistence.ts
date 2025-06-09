@@ -21,7 +21,7 @@ const persistence = {
         return data as T;
       }
       return JSON.parse(data) as T;
-    } catch (e) {
+    } catch {
       return defaultValue;
     }
   },

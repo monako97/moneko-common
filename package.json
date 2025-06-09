@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "prebuild": "rm -rf ./lib && rm -rf ./esm && tsc",
+    "prebuild": "rm -rf ./lib && rm -rf ./esm && node ./lint.mjs && tsc",
     "build": "swc src -d lib --strip-leading-paths -C exclude=__tests__ --copy-files",
     "postbuild": "swc src -d esm --strip-leading-paths -C module.type=es6 -C jsc.target=esnext -C exclude=__tests__ --copy-files",
     "test": "jest --watchAll --coverage"
@@ -30,11 +30,11 @@
     "types"
   ],
   "devDependencies": {
+    "@moneko/eslint": "1.6.1",
     "@swc/cli": "0.5.0",
     "@swc/core": "1.9.2",
     "@swc/jest": "0.2.37",
     "@types/jest": "29.5.14",
-    "eslint-config-neko": "3.0.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "ts-node": "10.9.2",

@@ -1,8 +1,10 @@
-import neko from 'eslint-config-neko';
+import base from '@moneko/eslint/base';
 
-const conf = [
-  ...neko.configs.recommended,
-  { ignores: ['lib', 'es', 'node_modules', 'coverage' ] },
+export default [
+  ...base.configs.recommended,
+  {
+    rules: {
+      
+    }
+  }
 ];
-
-export default conf;

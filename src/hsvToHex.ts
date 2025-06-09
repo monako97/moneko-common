@@ -1,6 +1,6 @@
+import type { HEXA, HSVA } from './colorParse';
 import hsvToRgb from './hsvToRgb';
 import rgbToHex from './rgbToHex';
-import type { HEXA, HSVA } from './colorParse';
 
 /**
  * 将 HSV 光谱转换为十六进制

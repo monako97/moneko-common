@@ -1,5 +1,5 @@
-import rgbToHsv from './rgbToHsv';
 import type { HSVA, MaxNum } from './colorParse';
+import rgbToHsv from './rgbToHsv';
 
 /**
  * 将 HEX 转换为 HSV

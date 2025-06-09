@@ -1,5 +1,4 @@
 export interface Navigator {
-  // eslint-disable-next-line no-unused-vars
   msSaveBlob?: (blob: Blob, defaultName?: string) => string;
 }
 

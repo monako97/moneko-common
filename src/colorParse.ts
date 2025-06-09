@@ -34,9 +34,9 @@ export interface ColorParse<T> {
    * @returns {string} color
    */
   complement(): string;
-  // eslint-disable-next-line no-unused-vars
+
   setValue(value: T): ColorParse<T>;
-  // eslint-disable-next-line no-unused-vars
+
   setAlpha(alpha: number): ColorParse<T>;
 }
 
@@ -56,14 +56,14 @@ export const maxNum: MaxNum = {
 export type Color<T extends ColorType = 'hsva'> = T extends 'cmyk'
   ? ColorParse<CMYK>
   : T extends 'rgba'
-  ? ColorParse<RGBA>
-  : T extends 'hsla'
-  ? ColorParse<HSLA>
-  : T extends 'hexa'
-  ? ColorParse<HEXA>
-  : T extends 'hsva'
-  ? ColorParse<HSVA & { max: MaxNum['hsva'] }>
-  : ColorParse<HSVA & { max: MaxNum['hsva'] }>;
+    ? ColorParse<RGBA>
+    : T extends 'hsla'
+      ? ColorParse<HSLA>
+      : T extends 'hexa'
+        ? ColorParse<HEXA>
+        : T extends 'hsva'
+          ? ColorParse<HSVA & { max: MaxNum['hsva'] }>
+          : ColorParse<HSVA & { max: MaxNum['hsva'] }>;
 
 /**
  * 将表示颜色的字符串解析为 HSV 数组, 通过toString()方法获取字符串值

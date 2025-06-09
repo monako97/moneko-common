@@ -13,11 +13,11 @@ export type ThrottleOptions = {
  * @param {ThrottleOptions} [options] - 节流选项
  * @returns {T} 函数
  */
-// eslint-disable-next-line no-unused-vars
+
 function throttle<T extends (...args: Parameters<T>) => void>(
   fn: T,
   wait: number,
-  options: ThrottleOptions = {}
+  options: ThrottleOptions = {},
 ): T {
   let timeoutId: number | null = null;
   let previous = 0;

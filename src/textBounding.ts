@@ -12,7 +12,10 @@
  *
  * console.log({ width, height });
  */
-function textBounding(initFontSize = '14px', declaration: Partial<Omit<CSSStyleDeclaration, 'cssText'>> = {}) {
+function textBounding(
+  initFontSize = '14px',
+  declaration: Partial<Omit<CSSStyleDeclaration, 'cssText'>> = {},
+) {
   const map = new Map<string, [width: number, height: number]>();
   const cssText = `position:absolute;visibility:hidden;height:auto;width:auto;white-space:pre;font-size:${initFontSize};`;
 

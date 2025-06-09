@@ -8,7 +8,7 @@ import type { RGBA } from './colorParse';
 function getColorContrast(one: RGBA, two: RGBA): number {
   function getRelativeLuminance(rgba: RGBA): number {
     const sRGB = [rgba[0] / 255, rgba[1] / 255, rgba[2] / 255].map((c) =>
-      c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)
+      c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4),
     );
 
     return sRGB[0] * 0.2126 + sRGB[1] * 0.7152 + sRGB[2] * 0.0722;
