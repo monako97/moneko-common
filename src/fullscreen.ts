@@ -9,7 +9,7 @@ export function requestFullscreen(e: Element): void {
     e.mozRequestFullScreen ||
     e.msRequestFullscreen ||
     e.webkitRequestFullScreen
-  )();
+  ).bind(e)();
 }
 /**
  * 退出全屏
@@ -21,7 +21,7 @@ export function exitFullscreen(): void {
     document.mozCancelFullScreen ||
     document.msExitFullscreen ||
     document.webkitCancelFullScreen
-  )();
+  ).bind(document)();
 }
 /**
  * 是否全屏
@@ -29,7 +29,9 @@ export function exitFullscreen(): void {
  */
 export function isFullscreen(): boolean {
   return (
-    document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement
   );
 }
 /**
