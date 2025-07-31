@@ -1,79 +1,99 @@
+[home-url]: https://monako97.github.io/moneko-common
+[docs-url]: https://monako97.github.io/moneko-common
+[docs-tag]: https://cdn.statically.io/gh/monako97/cdn/main/image/202307281701250.svg
+[npm-url]: https://npmjs.org/package/@moneko/common
+[install-tag]: https://nodei.co/npm/@moneko/common.png
+[version-tag]: https://img.shields.io/npm/v/@moneko/common/latest.svg?logo=npm
+[size-tag]: https://packagephobia.com/badge?p=@moneko/common@latest
+[size-url]: https://packagephobia.com/result?p=@moneko/common@latest
+[download-tag]: https://img.shields.io/npm/dm/@moneko/common.svg?logo=docusign
+[x-tag]: https://img.shields.io/twitter/follow/moneko97.svg?style=social
+
 # @moneko/common
 
-通用工具集
+🐾 🐾 🐾 🐾
 
-## cloneDeep
+> 这是一个通用 JavaScript/TypeScript 工具集
 
-## isColor
+[![docs-ui][docs-tag]][docs-url]
 
-## cmykToHsv
+[![version][version-tag]][npm-url]
+[![install size][size-tag]][size-url]
+[![download][download-tag]][npm-url]
+![x][x-tag]
 
-## isElementInside
+[![GitHub Actions CI](https://github.com/monako97/moneko-common/actions/workflows/cd.yml/badge.svg?style=flat-square)](https://github.com/monako97/moneko-common/actions/workflows/cd.yml)
 
-## colorParse
+[![@moneko/common][install-tag]][npm-url]
 
-## isEqual
+## 安装
 
-## downloadBlob
+```shell
+npm install @moneko/common -S
+# or
+yarn add @moneko/common -S
+# or
+pnpm add @moneko/common -S
+```
 
-## isFunction
+## 按需引入
 
-## entityToString
+`@moneko/common` 默认支持基于 ES modules 的 tree shaking，直接引入即可获得按需加载效果：
 
-## isObject
+```javascript
+import { cloneDeep, uuid } from '@moneko/common';
+```
 
-## fullscreen
+## API 参考
 
-## isString
-
-## getClientSize
-
-## isSvgElement
-
-## getColorContrast
-
-## isUndefined
-
-## getDataType
-
-## mixColor
-
-## getMaxZindex
-
-## passiveSupported
-
-## getPrefixCls  
-
-## persistence
-
-## getScrollTop
-
-## rgbToHex
-
-## hexToHsv
-
-## rgbToHsv
-
-## hslToHsv
-
-## setClipboard
-
-## hsvToCmyk
-
-## stringToBase64Url
-
-## hsvToHex
-
-## throttle
-
-## hsvToHsl
-
-## toneColor
-
-## hsvToRgb
-
-## updateStyleRule
-
-## hsvaToString  
-
-## watermark
+| 函数              | 说明                                                               |  版本 |
+| :---------------- | :----------------------------------------------------------------- | ----: |
+| cloneDeep         | 深拷贝                                                             |     - |
+| cmykToHsv         | 将 CMYK 转换为 HSV                                                 |     - |
+| colorParse        | 将表示颜色的字符串解析为 HSV 数组, 通过 toString()方法获取字符串值 |     - |
+| decodeText        | 解码文本                                                           | 1.9.0 |
+| digest            | 摘要算法                                                           | 1.8.0 |
+| downloadBlob      | 下载 Blob 对象                                                     |     - |
+| encodeText        | 编码文本                                                           | 1.9.0 |
+| entityToString    | 实体转换为字符串                                                   |     - |
+| frameCallback     | 帧回调                                                             |     - |
+| fullscreen        | 全屏操作                                                           |     - |
+| getClientSize     | 获取客户端尺寸                                                     |     - |
+| getColorContrast  | 获取颜色对比度                                                     |     - |
+| getDataType       | 获取数据类型                                                       |     - |
+| getMaxZindex      | 获取最大 z-index 值                                                |     - |
+| getPrefixCls      | 获取类名前缀                                                       |     - |
+| getScrollTop      | 获取滚动位置                                                       |     - |
+| hexToHsv          | 将 HEX 转换为 HSV                                                  |     - |
+| hslToHsv          | 将 HSL 转换为 HSV                                                  |     - |
+| hsvaToString      | 将 HSVA 转换为字符串                                               |     - |
+| hsvToCmyk         | 将 HSV 转换为 CMYK                                                 |     - |
+| hsvToHex          | 将 HSV 转换为 HEX                                                  |     - |
+| hsvToHsl          | 将 HSV 转换为 HSL                                                  |     - |
+| hsvToRgb          | 将 HSV 转换为 RGB                                                  |     - |
+| isColor           | 判断是否为颜色值                                                   |     - |
+| isElementInside   | 判断元素是否在容器内部                                             |     - |
+| isEqual           | 判断两个值是否相等                                                 |     - |
+| isFunction        | 判断是否为函数                                                     |     - |
+| isObject          | 判断是否为对象                                                     |     - |
+| isProxy           | 判断是否为代理对象                                                 |     - |
+| isString          | 判断是否为字符串                                                   |     - |
+| isSvgElement      | 判断是否为 SVG 元素                                                |     - |
+| isUint8Array      | 判断是否为 Uint8Array                                              |     - |
+| isUndefined       | 判断是否为 undefined                                               |     - |
+| md5               | MD5 哈希算法                                                       | 1.9.0 |
+| mixColor          | 混合颜色                                                           |     - |
+| onLCP             | 监听最大内容绘制                                                   |     - |
+| passiveSupported  | 判断是否支持被动事件监听器                                         |     - |
+| persistence       | 数据持久化                                                         |     - |
+| printBanner       | 打印横幅                                                           |     - |
+| rgbToHex          | 将 RGB 转换为 HEX                                                  |     - |
+| rgbToHsv          | 将 RGB 转换为 HSV                                                  |     - |
+| setClipboard      | 设置剪贴板内容                                                     |     - |
+| stringToBase64Url | 将字符串转换为 Base64 URL                                          |     - |
+| textBounding      | 获取文本边界                                                       |     - |
+| throttle          | 节流函数                                                           |     - |
+| toneColor         | 色调颜色                                                           |     - |
+| updateStyleRule   | 更新样式规则                                                       |     - |
+| uuid              | 生成 UUID                                                          |     - |
+| watermark         | 水印功能                                                           |     - |

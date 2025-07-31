@@ -10,8 +10,10 @@ export {
   type HSVA,
   type RGBA,
 } from './colorParse';
+export { default as decodeText } from './decodeText';
 export { type AlgorithmIdentifier, default as digest } from './digest';
 export { default as downloadBlob } from './downloadBlob';
+export { default as encodeText } from './encodeText';
 export { default as entityToString } from './entityToString';
 export { default as frameCallback } from './frameCallback';
 export { default as fullscreen } from './fullscreen';
@@ -38,6 +40,7 @@ export { default as isString } from './isString';
 export { default as isSvgElement } from './isSvgElement';
 export { default as isUint8Array } from './isUint8Array';
 export { default as isUndefined } from './isUndefined';
+export { default as md5 } from './md5';
 export { default as mixColor } from './mixColor';
 export { default as onLCP } from './onLCP';
 export { default as passiveSupported } from './passiveSupported';

@@ -4,6 +4,7 @@ export type AlgorithmIdentifier = 'SHA-1' | 'SHA-256' | 'SHA-384' | 'SHA-512';
 
 /**
  * 为内容生成摘要
+ * @since 1.8.0
  * @param {String | Uint8Array} message 内容字符串
  * @param {AlgorithmIdentifier} algorithm 摘要算法
  * @returns {Promise<String>} 摘要字符串
