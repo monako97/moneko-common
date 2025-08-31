@@ -2,7 +2,7 @@
  * 持久化对象，用于存储到本地存储中
  * @namespace
  */
-const persistence = {
+export const persistence = {
   /**
    * 从本地存储中加载数据
    * @param {string} key - 存储的键名
@@ -58,5 +58,3 @@ const persistence = {
     }
   },
 };
-
-export default persistence;

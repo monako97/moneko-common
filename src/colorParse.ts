@@ -1,13 +1,13 @@
-import cmykToHsv from './cmykToHsv';
-import hexToHsv from './hexToHsv';
-import hslToHsv from './hslToHsv';
-import hsvaToString from './hsvaToString';
-import hsvToCmyk from './hsvToCmyk';
-import hsvToHex from './hsvToHex';
-import hsvToHsl from './hsvToHsl';
-import hsvToRgb from './hsvToRgb';
-import isColor, { type ColorType } from './isColor';
-import rgbToHsv from './rgbToHsv';
+import { cmykToHsv } from './cmykToHsv';
+import { hexToHsv } from './hexToHsv';
+import { hslToHsv } from './hslToHsv';
+import { hsvaToString } from './hsvaToString';
+import { hsvToCmyk } from './hsvToCmyk';
+import { hsvToHex } from './hsvToHex';
+import { hsvToHsl } from './hsvToHsl';
+import { hsvToRgb } from './hsvToRgb';
+import { isColor, type ColorType } from './isColor';
+import { rgbToHsv } from './rgbToHsv';
 
 export type HEXA = [h: string, e: string, x: string, a: string];
 export type RGBA = [r: number, g: number, b: number, a: number];
@@ -71,7 +71,7 @@ export type Color<T extends ColorType = 'hsva'> = T extends 'cmyk'
  * @param {string} str color
  * @return {*} HSVA
  */
-function color(str: string): Color {
+export function colorParse(str: string): Color {
   /**
    * 将颜色名称转换为 rgb/十六进制
    * @param {string} colorStr 颜色名称
@@ -188,5 +188,3 @@ function color(str: string): Color {
 
   return c;
 }
-
-export default color;

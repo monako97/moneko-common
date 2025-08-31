@@ -10,7 +10,7 @@ const fragment = document.createDocumentFragment();
  * @param {Blob} blob Blob
  * @param {string} fileName 文件名
  */
-function downloadBlob(blob: Blob, fileName: string): void {
+export function downloadBlob(blob: Blob, fileName: string): void {
   // window.navigator.msSaveBlob：以本地方式保存文件
   const { msSaveBlob } = window.navigator as Navigator;
 
@@ -32,5 +32,3 @@ function downloadBlob(blob: Blob, fileName: string): void {
   // 清除对象
   URL.revokeObjectURL(objectUrl);
 }
-
-export default downloadBlob;

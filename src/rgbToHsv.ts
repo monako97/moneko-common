@@ -1,12 +1,12 @@
 import { type HSVA, type MaxNum, maxNum, type RGBA } from './colorParse';
-import hsvaToString from './hsvaToString';
+import { hsvaToString } from './hsvaToString';
 
 /**
  * 将 RGB 转换为 HSV
  * @param {RGBA} rgba rgba
  * @return {HSVA} HSVA
  */
-function rgbToHsv(rgba: RGBA): HSVA & { max: MaxNum['hsva'] } {
+export function rgbToHsv(rgba: RGBA): HSVA & { max: MaxNum['hsva'] } {
   const [r, g, b, a = 1] = rgba;
   const _r = r / 255,
     _g = g / 255,
@@ -49,5 +49,3 @@ function rgbToHsv(rgba: RGBA): HSVA & { max: MaxNum['hsva'] } {
   hsva.max = maxNum.hsva;
   return hsva;
 }
-
-export default rgbToHsv;

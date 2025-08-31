@@ -6,7 +6,7 @@ function paddingLength(length: number) {
  * @param {string} str - 需要转换的字符串。
  * @returns {string} 转换后的Base64Url格式的字符串。
  */
-function stringToBase64Url(str: string): string {
+export function stringToBase64Url(str: string): string {
   const encoder = new TextEncoder();
   const data = encoder.encode(str);
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
@@ -41,5 +41,3 @@ function stringToBase64Url(str: string): string {
     .replace(/_/g, '/')
     .replace(/[=]==/g, 'mc+');
 }
-
-export default stringToBase64Url;

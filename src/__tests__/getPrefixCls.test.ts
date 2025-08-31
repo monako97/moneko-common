@@ -1,4 +1,4 @@
-import getPrefixCls from '../getPrefixCls';
+import { getPrefixCls } from '../getPrefixCls';
 
 describe('test getPrefixCls', () => {
   it('getPrefixCls normal', () => {

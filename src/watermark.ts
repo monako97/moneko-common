@@ -1,7 +1,7 @@
-import getMaxZindex from './getMaxZindex';
-import stringToBase64Url from './stringToBase64Url';
-import textBounding from './textBounding';
-import updateStyleRule from './updateStyleRule';
+import { getMaxZindex } from './getMaxZindex';
+import { stringToBase64Url } from './stringToBase64Url';
+import { textBounding } from './textBounding';
+import { updateStyleRule } from './updateStyleRule';
 
 const normalFontFamily: string =
   'system-ui-thin, PingFangSC-Thin, Microsoft YaHei Light, Microsoft JhengHei Light, Yu Gothic Light, sans-serif';
@@ -123,9 +123,7 @@ function update(
   );
 }
 
-const watermark = {
+export const watermark = {
   create,
   update,
 };
-
-export default watermark;

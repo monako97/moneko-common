@@ -25,7 +25,7 @@
  * @returns {string} 返回一个字符串，其中每个字符代表UTF-8编码数据的字节。
  * 注意：此字符串可能包含不可打印的字符。
  */
-function decodeText(
+export function decodeText(
   input: string,
   encoding: string = 'utf-8',
   decoderOption?: TextDecoderOptions,
@@ -36,5 +36,3 @@ function decodeText(
     decodeOption,
   );
 }
-
-export default decodeText;

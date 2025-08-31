@@ -1,4 +1,4 @@
-import getDataType from '../getDataType';
+import { getDataType } from '../getDataType';
 
 describe('test data-judgment', () => {
   it('getType', () => {

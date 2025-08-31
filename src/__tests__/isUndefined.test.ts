@@ -1,4 +1,4 @@
-import isUndefined from '../isUndefined';
+import { isUndefined } from '../isUndefined';
 
 describe('test data-judgment', () => {
   it('isUndefined', () => {

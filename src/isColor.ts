@@ -3,7 +3,7 @@ export type ColorMatch = {
   type: ColorType;
   match: RegExpExecArray;
 };
-export default function isColor(str?: string | null) {
+export function isColor(str?: string | null) {
   if (!str) {
     return;
   }

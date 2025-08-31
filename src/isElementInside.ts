@@ -4,7 +4,7 @@
  * @param {Element} container 容器
  * @returns {boolean} true、false
  */
-export default function isElementInside(element?: Element, container?: Element): boolean {
+export function isElementInside(element?: Element, container?: Element): boolean {
   if (!element || !container) {
     return false;
   }

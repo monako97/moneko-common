@@ -1,5 +1,5 @@
-import getDataType from './getDataType';
-import isProxy from './isProxy';
+import { getDataType } from './getDataType';
+import { isProxy } from './isProxy';
 
 /**
  * 获取 Proxy 的目标对象
@@ -30,7 +30,7 @@ function toStringEqual(value: unknown, other: unknown) {
  * @param {*} other 第二个对象
  * @return {Boolean} 如果它们的值相等,则返回true
  */
-function isEqual(value: unknown, other: unknown, cache = new WeakMap()): boolean {
+export function isEqual(value: unknown, other: unknown, cache = new WeakMap()): boolean {
   // 使用栈模拟递归
   const stack: [unknown, unknown][] = [[value, other]];
 
@@ -181,5 +181,3 @@ function isEqual(value: unknown, other: unknown, cache = new WeakMap()): boolean
 
   return true;
 }
-
-export default isEqual;

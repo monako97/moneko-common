@@ -1,4 +1,4 @@
-import isString from '../isString';
+import { isString } from '../isString';
 
 describe('test data-judgment', () => {
   it('isString', () => {

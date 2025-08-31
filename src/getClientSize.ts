@@ -7,7 +7,7 @@ export interface ClientSize {
  * 获取可视区域大小
  * @return {ClientSize} clientWidth and clientHeight
  */
-function getClientSize(): ClientSize {
+export function getClientSize(): ClientSize {
   if (window.innerWidth !== null) {
     // ie9 +  最新浏览器
     return {
@@ -28,5 +28,3 @@ function getClientSize(): ClientSize {
     height: document.body.clientHeight,
   };
 }
-
-export default getClientSize;

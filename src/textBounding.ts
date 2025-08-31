@@ -12,7 +12,7 @@
  *
  * console.log({ width, height });
  */
-function textBounding(
+export function textBounding(
   initFontSize = '14px',
   declaration: Partial<Omit<CSSStyleDeclaration, 'cssText'>> = {},
 ) {
@@ -45,5 +45,3 @@ function textBounding(
     return map.get(key)!;
   };
 }
-
-export default textBounding;

@@ -1,4 +1,4 @@
-import downloadBlob, { type Navigator } from '../downloadBlob';
+import { downloadBlob, type Navigator } from '../downloadBlob';
 
 /**
  * @jest-environment jsdom

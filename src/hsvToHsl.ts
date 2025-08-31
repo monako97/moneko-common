@@ -5,7 +5,7 @@ import { type HSLA, type HSVA, type MaxNum, maxNum } from './colorParse';
  * @param {HSVA} hsva 色
  * @returns {HSLA} HSL values
  */
-function hsvToHsl(hsva: HSVA): HSLA & { max: MaxNum['hsla'] } {
+export function hsvToHsl(hsva: HSVA): HSLA & { max: MaxNum['hsla'] } {
   const [h, s, v, a = 1] = hsva;
   let _s = s / 100;
   const _v = v / 100;
@@ -31,4 +31,3 @@ function hsvToHsl(hsva: HSVA): HSLA & { max: MaxNum['hsla'] } {
   hsla.max = maxNum.hsla;
   return hsla;
 }
-export default hsvToHsl;

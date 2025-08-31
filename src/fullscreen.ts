@@ -46,10 +46,3 @@ export function toggleFullscreen(e: Element): void {
     requestFullscreen(e);
   }
 }
-
-export default {
-  requestFullscreen,
-  exitFullscreen,
-  isFullscreen,
-  toggleFullscreen,
-};

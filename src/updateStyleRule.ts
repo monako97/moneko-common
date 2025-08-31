@@ -6,7 +6,7 @@ const cache: Record<string, CSSStyleRule> = {};
  * @param {string} [selector = ':root'] - 更新的位置, CSS样式表选择器
  * @returns {void}
  */
-function updateStyleRule(property: Record<string, string | number | null>, selector: string): void {
+export function updateStyleRule(property: Record<string, string | number | null>, selector: string): void {
   let len = document.styleSheets.length;
 
   if (len === 0) {
@@ -50,5 +50,3 @@ function updateStyleRule(property: Record<string, string | number | null>, selec
     }
   }
 }
-
-export default updateStyleRule;

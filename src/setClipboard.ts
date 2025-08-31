@@ -1,4 +1,4 @@
-import isFunction from './isFunction';
+import { isFunction } from './isFunction';
 
 function clipboardTimer(t: HTMLElement | Element) {
   let c: number | null = window.setTimeout(() => {
@@ -63,7 +63,7 @@ function unsecuredClipboard(text: string, target?: Element, onError?: (e: string
  * @param {Function} onError 失败的回调
  * @returns {Promise<void>} Promise<void>
  */
-function setClipboard(text: string, target?: Element, onError?: (e: string) => void): void {
+export function setClipboard(text: string, target?: Element, onError?: (e: string) => void): void {
   if (typeof navigator.clipboard === 'undefined') {
     unsecuredClipboard(text, target, onError);
   } else {
@@ -77,5 +77,3 @@ function setClipboard(text: string, target?: Element, onError?: (e: string) => v
     );
   }
 }
-
-export default setClipboard;

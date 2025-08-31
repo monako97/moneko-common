@@ -2,7 +2,7 @@
  * 获取最大 z-index
  * @returns {number} z-index
  */
-function getMaxZindex(): number {
+export function getMaxZindex(): number {
   const el = document.getElementsByTagName('*');
   let max = +window.getComputedStyle(el[0]).zIndex || 0;
 
@@ -15,5 +15,3 @@ function getMaxZindex(): number {
   }
   return max;
 }
-
-export default getMaxZindex;

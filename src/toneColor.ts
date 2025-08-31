@@ -1,7 +1,7 @@
-import colorParse, { type RGBA } from './colorParse';
-import rgbToHex from './rgbToHex';
+import { colorParse, type RGBA } from './colorParse';
+import { rgbToHex } from './rgbToHex';
 
-type Tone = 0 | 5 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 95 | 98 | 99 | 100;
+export type Tone = 0 | 5 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 95 | 98 | 99 | 100;
 export type ToneColor = Record<Tone, string>;
 
 export function toneColor(color: string, dark?: boolean): ToneColor {
@@ -56,5 +56,3 @@ export function toneColor(color: string, dark?: boolean): ToneColor {
 
   return palette as ToneColor;
 }
-
-export default toneColor;

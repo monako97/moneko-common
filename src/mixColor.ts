@@ -1,7 +1,7 @@
-import colorParse from './colorParse';
-import rgbToHex from './rgbToHex';
+import { colorParse } from './colorParse';
+import { rgbToHex } from './rgbToHex';
 
-function mixColor(c1: string, c2: string, percent: number) {
+export function mixColor(c1: string, c2: string, percent: number) {
   const _percent = percent > 1 ? percent / 100 : percent;
   const weight = 1 - _percent;
   const rgb1 = colorParse(c1).toRgba();
@@ -14,5 +14,3 @@ function mixColor(c1: string, c2: string, percent: number) {
     rgb1[3] * weight + rgb2[3] * _percent,
   ]).toString();
 }
-
-export default mixColor;

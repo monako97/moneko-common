@@ -23,8 +23,6 @@
  *                   注意：此字符串可能包含不可打印的字符。
  * @throws {TypeError} 如果输入不是字符串。
  */
-function encodeText(input: string): string {
+export function encodeText(input: string): string {
   return String.fromCharCode(...new TextEncoder().encode(input));
 }
-
-export default encodeText;

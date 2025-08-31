@@ -3,7 +3,7 @@
  * @param {VoidFunction} call 回调函数
  * @constructor
  */
-function frameCallback(call: VoidFunction) {
+export function frameCallback(call: VoidFunction) {
   let now = performance.now();
 
   function checkTime(timestamp: number) {
@@ -20,5 +20,3 @@ function frameCallback(call: VoidFunction) {
 
   requestAnimationFrame(checkTime);
 }
-
-export default frameCallback;

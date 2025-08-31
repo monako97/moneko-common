@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-
-interface BannerTheme {
+export interface BannerTheme {
   primary?: string; // 主要背景色
   secondary?: string; // 文字背景色
   text?: string; // 文字颜色
@@ -21,7 +19,7 @@ interface BannerTheme {
  *
  * @returns {void}
  */
-function printBanner(
+export function printBanner(
   name: string,
   version: string,
   type: string,
@@ -49,6 +47,7 @@ function printBanner(
     ];
     const message = `\n %c %c %c ${name} ${version} - \u2730 ${type} \u2730  %c  %c  ( ^ _ ^ ) ${domain} %c  %c \u2665%c\u2665%c\u2665 \n`;
     // 使用 Function 构造器来避免被打包工具优化掉
+    /* eslint-disable-next-line no-console */
     const log = Function.prototype.bind.call(console.log, console);
 
     log(message, ...styles);
@@ -60,5 +59,3 @@ function printBanner(
     )();
   }
 }
-
-export default printBanner;

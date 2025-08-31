@@ -1,4 +1,4 @@
-import encodeText from './encodeText';
+import { encodeText } from './encodeText';
 
 /**
  * @en Add two integers, wrapping at 2^32.
@@ -331,7 +331,7 @@ function hexHMACMD5(k: string, d: string): string {
  * @param {boolean} [raw] Raw output switch
  * @returns {string} MD5 output
  */
-function md5(string: string, key?: string, raw?: boolean): string {
+export function md5(string: string, key?: string, raw?: boolean): string {
   if (!key) {
     if (!raw) {
       return hexMD5(string);
@@ -343,5 +343,3 @@ function md5(string: string, key?: string, raw?: boolean): string {
   }
   return rawHMACMD5(key, string);
 }
-
-export default md5;

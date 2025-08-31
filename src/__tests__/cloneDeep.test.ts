@@ -1,4 +1,4 @@
-import cloneDeep from '../cloneDeep';
+import { cloneDeep } from '../cloneDeep';
 
 describe('test data-judgment', () => {
   it('cloneDeep', () => {

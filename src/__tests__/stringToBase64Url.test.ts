@@ -1,4 +1,4 @@
-import stringToBase64Url from '../stringToBase64Url';
+import { stringToBase64Url } from '../stringToBase64Url';
 
 describe('test stringToBase64Url', () => {
   it('stringToBase64Url', () => {

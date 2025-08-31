@@ -1,4 +1,4 @@
-let passiveSupported = false;
+export let passiveSupported = false;
 
 try {
   const options = Object.defineProperty({}, 'passive', {
@@ -11,5 +11,3 @@ try {
 } catch {
   void 0;
 }
-
-export default passiveSupported;

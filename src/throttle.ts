@@ -14,7 +14,7 @@ export type ThrottleOptions = {
  * @returns {T} 函数
  */
 
-function throttle<T extends (...args: Parameters<T>) => void>(
+export function throttle<T extends (...args: Parameters<T>) => void>(
   fn: T,
   wait: number,
   options: ThrottleOptions = {},
@@ -50,5 +50,3 @@ function throttle<T extends (...args: Parameters<T>) => void>(
   }
   return throttled as T;
 }
-
-export default throttle;

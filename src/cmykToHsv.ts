@@ -1,13 +1,13 @@
 import { type CMYK, type HSVA, type MaxNum, maxNum } from './colorParse';
-import hsvaToString from './hsvaToString';
-import rgbToHsv from './rgbToHsv';
+import { hsvaToString } from './hsvaToString';
+import { rgbToHsv } from './rgbToHsv';
 
 /**
  * 将 CMYK 转换为 HSV
  * @param {CMYK} cmyk cmyk
  * @return {HSVA} HSV values.
  */
-function cmykToHsv(cmyk: CMYK): HSVA & { max: MaxNum['hsva'] } {
+export function cmykToHsv(cmyk: CMYK): HSVA & { max: MaxNum['hsva'] } {
   const [c, m, y, k] = cmyk;
   const _c = c / 100,
     _m = m / 100,
@@ -23,4 +23,3 @@ function cmykToHsv(cmyk: CMYK): HSVA & { max: MaxNum['hsva'] } {
   hsva.max = maxNum.hsva;
   return hsva;
 }
-export default cmykToHsv;

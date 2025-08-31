@@ -1,4 +1,4 @@
-import watermark from '../watermark';
+import { watermark } from '../watermark';
 
 describe('test watermark', () => {
   it('create', () => {
