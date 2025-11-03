@@ -24,5 +24,10 @@
  * @throws {TypeError} 如果输入不是字符串。
  */
 export function encodeText(input: string): string {
-  return String.fromCharCode(...new TextEncoder().encode(input));
+  let text = '';
+
+  for (const byte of new TextEncoder().encode(input)) {
+    text += String.fromCharCode(byte);
+  }
+  return text;
 }
