@@ -6,7 +6,7 @@ import { hsvToCmyk } from './hsvToCmyk';
 import { hsvToHex } from './hsvToHex';
 import { hsvToHsl } from './hsvToHsl';
 import { hsvToRgb } from './hsvToRgb';
-import { isColor, type ColorType } from './isColor';
+import { type ColorType, isColor } from './isColor';
 import { rgbToHsv } from './rgbToHsv';
 
 export type HEXA = [h: string, e: string, x: string, a: string];

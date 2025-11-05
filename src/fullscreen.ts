@@ -29,9 +29,7 @@ export function exitFullscreen(): void {
  */
 export function isFullscreen(): boolean {
   return (
-    document.fullscreenElement ||
-    document.webkitFullscreenElement ||
-    document.mozFullScreenElement
+    document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement
   );
 }
 /**

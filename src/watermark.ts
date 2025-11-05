@@ -86,25 +86,25 @@ function create(text: string, conf?: Partial<WatermarkConfig>): string {
       c.y
     }" stroke-opacity="${c.opacity}" stroke="${c.color}" font-size="${c.fontSize}" font-family="${
       c.fontFamily
-    }" font-weight="${c.fontWeight}" transform="rotate(${c.angle} ${c.width / 2} ${c.height / 2})">${text}</text></svg>`,
+    }" font-weight="${c.fontWeight}" transform="rotate(${c.angle} ${c.width / 2} ${
+      c.height / 2
+    })">${text}</text></svg>`,
   )}`;
 }
 
+interface WatermarkParamsType extends Partial<WatermarkConfig> {
+  /** 水印更新的位置, CSS样式表选择器
+   * @default ':root'
+   */
+  selector?: string;
+}
 /**
  * 更新水印，如果页面不存在水印则创建一个
  * @param {string | null | undefined} text - 水印文字, 传入 `null`、`undefined` 时删除水印
  * @param {WatermarkParamsType} [opt] - 水印参数
  * @returns {void}
  */
-function update(
-  text?: string | null,
-  opt?: WatermarkConfig & {
-    /** 水印更新的位置, CSS样式表选择器
-     * @default ':root'
-     */
-    selector?: string;
-  },
-): void {
+function update(text?: string | null, opt?: WatermarkParamsType): void {
   const { selector = ':root::after', ...c } = opt || {};
 
   updateStyleRule(

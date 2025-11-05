@@ -17,7 +17,7 @@
  * func('任务3', 100);
  */
 export function debouncePromise<T extends unknown[], R>(
-  executor: (signal: AbortSignal, ...args: T) => Promise<R>
+  executor: (signal: AbortSignal, ...args: T) => Promise<R>,
 ): (...args: T) => Promise<R> {
   let currentController: AbortController | null = null;
 

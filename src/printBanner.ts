@@ -26,6 +26,10 @@ export function printBanner(
   domain: string = '',
   theme: BannerTheme = {},
 ): void {
+  // 使用 Function 构造器来避免被打包工具优化掉
+  /* eslint-disable-next-line no-console */
+  const log = Function.prototype.bind.call(console.log, console);
+
   try {
     const {
       primary = '#7581a8',
@@ -46,16 +50,9 @@ export function printBanner(
       `color: ${heart}; background: #fff; ${baseStyle}`,
     ];
     const message = `\n %c %c %c ${name} ${version} - \u2730 ${type} \u2730  %c  %c  ( ^ _ ^ ) ${domain} %c  %c \u2665%c\u2665%c\u2665 \n`;
-    // 使用 Function 构造器来避免被打包工具优化掉
-    /* eslint-disable-next-line no-console */
-    const log = Function.prototype.bind.call(console.log, console);
 
     log(message, ...styles);
   } catch {
-    Function.prototype.bind.call(
-      console.log,
-      console,
-      `${name} ${version} - ${type} - ${domain}`,
-    )();
+    log(`${name} ${version} - ${type} - ${domain}`);
   }
 }
