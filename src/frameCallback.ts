@@ -3,7 +3,7 @@
  * @param {VoidFunction} call 回调函数
  * @constructor
  */
-export function frameCallback(call: VoidFunction) {
+export function frameCallback(call: VoidFunction): void {
   let now = performance.now();
 
   function checkTime(timestamp: number) {

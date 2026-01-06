@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { isEqual } from '../isEqual';
+import { isEqual } from '@moneko/common';
 
 describe('test data-judgment', () => {
   it('isEqual', () => {

@@ -1,4 +1,4 @@
-import { isSvgElement } from '../isSvgElement';
+import { isSvgElement } from '@moneko/common';
 
 describe('test data-judgment', () => {
   it('isSvgElement', () => {

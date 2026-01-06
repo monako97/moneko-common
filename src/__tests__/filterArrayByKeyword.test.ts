@@ -1,4 +1,4 @@
-import { filterArrayByKeyword } from '../filterArrayByKeyword';
+import { filterArrayByKeyword } from '@moneko/common';
 
 describe('test arraySearch', () => {
   it('arraySearch', () => {

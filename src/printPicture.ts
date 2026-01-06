@@ -59,7 +59,7 @@ interface PrintImageOptions {
   placeholder?: string;
 }
 
-async function printPicture(url: string, options?: PrintImageOptions) {
+export async function printPicture(url: string, options?: PrintImageOptions): Promise<void> {
   const res = await parseImageUrl(url);
   const { scale = 1, width, height, placeholder } = options ?? {};
   let rw = res.width,
@@ -84,31 +84,6 @@ async function printPicture(url: string, options?: PrintImageOptions) {
 
   log(
     `%c${alt}`,
-    `padding: ${pt}px ${pl}px;
-    background-image: url(${res.data});background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    color: transparent;
-    font-size: ${fontSize}px;`,
+    `padding: ${pt}px ${pl}px;background-image: url(${res.data});background-repeat: no-repeat;background-size: contain;background-position: center;color: transparent;font-size: ${fontSize}px;`,
   );
 }
-printPicture('https://h5static.dewucdn.com/node-common/4eff4dcf-45bb-076d-abef-6e117f708d42.svg');
-printPicture('https://h5static.dewucdn.com/node-common/75de0360-fb9b-cde5-0b4e-02b3df87915c.svg');
-printPicture('https://h5static.dewucdn.com/node-common/74f91d80-c0ac-9082-b3ed-d1167c00bfe3.svg', {
-  height: 50,
-});
-printPicture('https://h5static.dewucdn.com/node-common/de5243eb-73f7-d654-e291-6bb84eaccbbd.svg', {
-  height: 50,
-});
-printPicture('https://h5static.dewucdn.com/node-common/af89b397-e024-ca0c-6c31-e9c73a34a1e8.svg', {
-  height: 50,
-});
-printPicture('https://h5static.dewucdn.com/node-common/bda896b7-4b37-1298-9116-6f77b8439d1d.svg', {
-  height: 50,
-});
-printPicture('https://h5static.dewucdn.com/node-common/2d3daa89-f124-e7d2-8381-820ca5689d36.svg', {
-  height: 50,
-});
-printPicture('https://h5static.dewucdn.com/node-common/a25d43d9-81d7-bc22-ce3c-744ca4f04efe.svg', {
-  height: 50,
-});

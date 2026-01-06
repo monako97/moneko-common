@@ -1,4 +1,4 @@
-import { isString } from '../isString';
+import { isString } from '@moneko/common';
 
 describe('test data-judgment', () => {
   it('isString', () => {

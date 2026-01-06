@@ -1,6 +1,6 @@
 [home-url]: https://monako97.github.io/moneko-common
 [docs-url]: https://monako97.github.io/moneko-common
-[docs-tag]: https://cdn.statically.io/gh/monako97/cdn/main/image/202307281701250.svg
+[docs-tag]: https://h5static.dewucdn.com/node-common/75de0360-fb9b-cde5-0b4e-02b3df87915c.svg
 [npm-url]: https://npmjs.org/package/@moneko/common
 [install-tag]: https://nodei.co/npm/@moneko/common.png
 [version-tag]: https://img.shields.io/npm/v/@moneko/common/latest.svg?logo=npm
@@ -88,6 +88,7 @@ import { cloneDeep, uuid } from '@moneko/common';
 | passiveSupported     | 判断是否支持被动事件监听器                                         |      - |
 | persistence          | 数据持久化                                                         |      - |
 | printBanner          | 打印横幅                                                           |      - |
+| printPicture         | 打印图片                                                           | 1.12.0 |
 | rgbToHex             | 将 RGB 转换为 HEX                                                  |      - |
 | rgbToHsv             | 将 RGB 转换为 HSV                                                  |      - |
 | setClipboard         | 设置剪贴板内容                                                     |      - |

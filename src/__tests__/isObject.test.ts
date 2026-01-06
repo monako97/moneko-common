@@ -1,4 +1,4 @@
-import { isObject } from '../isObject';
+import { isObject } from '@moneko/common';
 
 describe('test data-judgment', () => {
   it('isObject', () => {

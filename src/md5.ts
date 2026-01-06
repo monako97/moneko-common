@@ -87,7 +87,7 @@ function md5ii(
  */
 function binlMD5(x: number[], len: number): number[] {
   /* append padding */
-  x[len >> 5] |= 0x80 << len % 32;
+  x[len >> 5] |= 0x80 << (len % 32);
   x[(((len + 64) >>> 9) << 4) + 14] = len;
 
   let i;
@@ -194,7 +194,7 @@ function binl2rstr(input: number[]): string {
   const length32 = input.length * 32;
 
   for (i = 0; i < length32; i += 8) {
-    output += String.fromCharCode((input[i >> 5] >>> i % 32) & 0xff);
+    output += String.fromCharCode((input[i >> 5] >>> (i % 32)) & 0xff);
   }
   return output;
 }
@@ -218,7 +218,7 @@ function rstr2binl(input: string): number[] {
   const length8 = input.length * 8;
 
   for (i = 0; i < length8; i += 8) {
-    output[i >> 5]! |= (input.charCodeAt(i / 8) & 0xff) << i % 32;
+    output[i >> 5]! |= (input.charCodeAt(i / 8) & 0xff) << (i % 32);
   }
   return output as number[];
 }

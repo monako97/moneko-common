@@ -122,8 +122,11 @@ function update(text?: string | null, opt?: WatermarkParamsType): void {
     selector,
   );
 }
-
-export const watermark = {
+interface Watermark {
+  create: typeof create;
+  update: typeof update;
+}
+export const watermark: Watermark = {
   create,
   update,
 };

@@ -1,4 +1,4 @@
-import { cloneDeep } from '../cloneDeep';
+import { cloneDeep } from '@moneko/common';
 
 describe('test data-judgment', () => {
   it('cloneDeep', () => {
