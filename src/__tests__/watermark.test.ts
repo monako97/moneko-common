@@ -1,4 +1,4 @@
-import { watermark } from '../watermark';
+import { watermark } from '@moneko/common';
 
 describe('test watermark', () => {
   it('create', () => {

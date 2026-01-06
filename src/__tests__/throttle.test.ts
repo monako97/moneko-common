@@ -1,4 +1,4 @@
-import { throttle } from '../throttle';
+import { throttle } from '@moneko/common';
 
 describe('throttle', () => {
   beforeEach(() => {

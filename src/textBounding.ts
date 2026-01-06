@@ -19,7 +19,8 @@ export function textBounding(
   const map = new Map<string, [width: number, height: number]>();
   const cssText = `position:absolute;visibility:hidden;height:auto;width:auto;white-space:pre;font-size:${initFontSize};`;
 
-  return function (text: string | number, fontSize = initFontSize) {
+  return function (text: string | number, _fontSize?: string): [width: number, height: number] {
+    const fontSize = _fontSize || initFontSize;
     const key = `${text}${fontSize}${JSON.stringify(declaration)}`;
 
     if (!map.has(key)) {

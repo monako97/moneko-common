@@ -39,6 +39,7 @@ export * from './onLCP';
 export * from './passiveSupported';
 export * from './persistence';
 export * from './printBanner';
+export * from './printPicture';
 export * from './rgbToHex';
 export * from './rgbToHsv';
 export * from './setClipboard';

@@ -1,4 +1,4 @@
-import { isUint8Array } from '../isUint8Array';
+import { isUint8Array } from '@moneko/common';
 
 describe('test data-judgment', () => {
   it('isUint8Array', () => {

@@ -1,9 +1,9 @@
 export type ColorType = 'cmyk' | 'rgba' | 'hsla' | 'hsva' | 'hexa';
-export type ColorMatch = {
+export interface ColorMatch {
   type: ColorType;
   match: RegExpExecArray;
-};
-export function isColor(str?: string | null) {
+}
+export function isColor(str?: string | null): ColorMatch | undefined {
   if (!str) {
     return;
   }

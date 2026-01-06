@@ -1,4 +1,4 @@
-import { getPrefixCls } from '../getPrefixCls';
+import { getPrefixCls } from '@moneko/common';
 
 describe('test getPrefixCls', () => {
   it('getPrefixCls normal', () => {

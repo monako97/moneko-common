@@ -4,6 +4,7 @@
 node_modules
 coverage
 dist
+cjs
 lib
 esm
 types

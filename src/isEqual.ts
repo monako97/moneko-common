@@ -30,7 +30,8 @@ function toStringEqual(value: unknown, other: unknown) {
  * @param {*} other 第二个对象
  * @return {Boolean} 如果它们的值相等,则返回true
  */
-export function isEqual(value: unknown, other: unknown, cache = new WeakMap()): boolean {
+export function isEqual<A, B>(value: A, other: B, _cache?: WeakMap<object, object>): boolean {
+  const cache = _cache || new WeakMap<object, object>();
   // 使用栈模拟递归
   const stack: [unknown, unknown][] = [[value, other]];
 

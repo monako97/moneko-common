@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "moduleResolution": "Node",
-    "target": "es2017",
-    "module": "CommonJS",
+    "target": "esnext",
+    "module": "esnext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -10,7 +10,10 @@
     "emitDeclarationOnly": true,
     "removeComments": false, 
     "outDir": "types",
-    "rootDir": "src"
+    "rootDir": "src",
+    "paths": {
+      "@moneko/common": ["./src/index.ts"]
+    }
   },
   "exclude": ["src/__tests__"],
   "include": ["src", "typings"]

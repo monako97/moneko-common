@@ -1,3 +1,3 @@
-export function cloneDeep<T>(value: T, transfer?: StructuredSerializeOptions) {
-  return structuredClone(value, transfer);
+export function cloneDeep<T>(value: T, transfer?: StructuredSerializeOptions): T {
+  return structuredClone<T>(value, transfer);
 }
